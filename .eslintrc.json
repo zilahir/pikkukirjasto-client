@@ -1,0 +1,31 @@
+{
+	"root": true,
+	"env": {
+		"browser": true
+	},
+	"extends": [
+		"plugin:jsx-a11y/recommended",
+		"airbnb",
+		"prettier",
+		"plugin:markdown/recommended",
+		"plugin:unicorn/recommended",
+		"plugin:jsdoc/recommended",
+		"plugin:react-hooks/recommended"
+	],
+	"plugins": ["prettier"],
+	"rules": {
+		"prettier/prettier": "error",
+		"no-tabs": 0,
+		"indent": ["error", "tab"],
+		"react/jsx-indent": ["error", "tab"],
+		"react/jsx-indent-props": ["error", "tab"],
+		"semi": [2, "never"],
+		"arrow-parens": [1, "as-needed"],
+		"unicorn/filename-case": [
+			"error",
+			{
+				"case": "camelCase"
+			}
+		]
+	}
+}
