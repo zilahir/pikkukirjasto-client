@@ -3,8 +3,14 @@ import PropTypes from 'prop-types'
 
 import styles from './Book.module.scss'
 
-const Book = ({ book }) => (
-	<div className={styles.oneBook}>
+const Book = ({ book, onClick }) => (
+	<div
+		onKeyDown={undefined}
+		tabIndex={-1}
+		role="button"
+		onClick={onClick}
+		className={styles.oneBook}
+	>
 		<div className={styles.cover}>
 			<img alt={book.title} src={book.cover} />
 		</div>
@@ -15,6 +21,10 @@ const Book = ({ book }) => (
 	</div>
 )
 
+Book.defaultProps = {
+	onClick: () => {},
+}
+
 Book.propTypes = {
 	book: PropTypes.shape({
 		title: PropTypes.string,
@@ -22,6 +32,7 @@ Book.propTypes = {
 		isbn: PropTypes.string,
 		cover: PropTypes.string,
 	}).isRequired,
+	onClick: PropTypes.func,
 }
 
 export default Book
