@@ -1,5 +1,43 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins/typography';
+
 .bookContainer {
 	height: calc(100vh - 25vh);
 	display: flex;
 	align-items: center;
+}
+
+.modalInner {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+
+	.borrowingModal {
+		.modalTitle {
+			@include heading() {
+				font-size: 26px;
+				color: $main-background-dark;
+			}
+		}
+		.subTitle {
+			@include paragraph(16px, rgba($main-background-dark, 1));
+			margin: 10px 0;
+
+			span {
+				@include heading() {
+					font-size: 18px;
+					color: $main-background-dark;
+					font-weight: 600;
+				}
+			}
+		}
+	}
+
+	.metaContainer {
+		padding: 10px;
+		border-radius: 10px;
+		background: rgba($color: #ccc, $alpha: 1);
+		margin: 40px 0;
+	}
 }

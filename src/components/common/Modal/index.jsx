@@ -2,10 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { AnimatePresence, motion } from 'framer-motion'
 import ReactDOM from 'react-dom'
+import classnames from 'classnames'
 
 import styles from './Modal.module.scss'
 
-const Modal = ({ children, height, isVisible, handleClose }) => {
+const Modal = ({
+	children,
+	height,
+	isVisible,
+	handleClose,
+	innerContainer,
+}) => {
 	const modalVariants = {
 		visible: {
 			height,
@@ -34,7 +41,9 @@ const Modal = ({ children, height, isVisible, handleClose }) => {
 						exit="exit"
 						className={styles.modalContainer}
 					>
-						<div className={styles.innerContainer}>{children}</div>
+						<div className={classnames(styles.innerContainer, innerContainer)}>
+							{children}
+						</div>
 					</motion.div>
 				)}
 			</AnimatePresence>
@@ -56,6 +65,7 @@ const Modal = ({ children, height, isVisible, handleClose }) => {
 
 Modal.defaultProps = {
 	height: '80vh',
+	innerContainer: undefined,
 }
 
 Modal.propTypes = {
@@ -65,6 +75,7 @@ Modal.propTypes = {
 	]).isRequired,
 	height: PropTypes.number,
 	handleClose: PropTypes.func.isRequired,
+	innerContainer: PropTypes.string,
 	isVisible: PropTypes.bool.isRequired,
 }
 

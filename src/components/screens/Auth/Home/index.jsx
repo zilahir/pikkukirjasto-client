@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel'
 import '@brainhubeu/react-carousel/lib/style.css'
+import 'carbon-components/css/carbon-components.min.css'
+import { Button } from 'carbon-components-react'
 
 import Book from '../../../common/Book'
 import Header from '../../../common/Header'
@@ -70,8 +72,25 @@ const Home = () => {
 				<Modal
 					handleClose={() => toggleBorrowingModal(false)}
 					isVisible={isBorrowingModalVisible}
+					innerContainer={styles.modalInner}
+					height="40vh"
 				>
-					{isBorrowingModalVisible && <h1>{selectedBook.title}</h1>}
+					{isBorrowingModalVisible && (
+						<>
+							<div className={styles.borrowingModal}>
+								<h1 className={styles.modalTitle}>Are you sure?</h1>
+								<p className={styles.subTitle}>
+									You are about to borrow <span>{selectedBook.title}</span>
+								</p>
+								<div className={styles.metaContainer}>
+									<p className={styles.meta}>
+										To borrow this book press the button below
+									</p>
+								</div>
+							</div>
+							<Button>Borrow</Button>
+						</>
+					)}
 				</Modal>
 			</HomeContext.Provider>
 		</>
