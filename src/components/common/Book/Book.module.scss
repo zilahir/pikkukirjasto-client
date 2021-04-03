@@ -1,0 +1,17 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins/typography';
+@import '../../../styles/mixins/_box-shadow';
+
+.oneBook {
+	padding: 10px;
+	.cover {
+		img {
+			max-width: 100%;
+			border-radius: 20px;
+		}
+	}
+
+	.meta {
+		padding: 20px 0;
+	}
+}

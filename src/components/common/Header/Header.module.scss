@@ -2,7 +2,7 @@
 @import '../../../styles/mixins/typography';
 
 .headerRoot {
-	height: 20vw;
+	height: 10vh;
 	background: transparent;
 	display: flex;
 	align-items: center;
@@ -15,7 +15,7 @@
 
 		.day {
 			font-family: 'Dela Gothic One', cursive;
-			font-size: 13vw;
+			font-size: 8vh;
 			margin-right: 10px;
 		}
 
