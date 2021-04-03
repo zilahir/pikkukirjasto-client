@@ -13,5 +13,13 @@
 
 	.meta {
 		padding: 20px 0;
+
+		.title {
+			@include heading;
+		}
+
+		p {
+			@include paragraph(18px, rgba($main-background-dark, 0.6));
+		}
 	}
 }

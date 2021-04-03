@@ -9,7 +9,7 @@ const Book = ({ book }) => (
 			<img alt={book.title} src={book.cover} />
 		</div>
 		<div className={styles.meta}>
-			<p>{book.title}</p>
+			<h1 className={styles.title}>{book.title}</h1>
 			<p>{book.author}</p>
 		</div>
 	</div>
