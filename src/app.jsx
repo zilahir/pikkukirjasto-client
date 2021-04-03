@@ -1,4 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
+import { Switch, Route, useLocation } from 'react-router-dom'
+import BottomBar from './components/common/BottomBar'
+import Home from './components/screens/Auth/Home'
+
 import OnBoad from './components/screens/OnBoard'
 
 /**
@@ -7,9 +12,14 @@ import OnBoad from './components/screens/OnBoard'
  *
  */
 function App() {
+	const location = useLocation()
 	return (
 		<>
-			<OnBoad />
+			<Switch>
+				<Route exact path="/onboard" component={OnBoad} />
+				<Route exact path="/" component={Home} />
+			</Switch>
+			<BottomBar />
 		</>
 	)
 }

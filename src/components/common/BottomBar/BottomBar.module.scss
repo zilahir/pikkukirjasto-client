@@ -1,0 +1,28 @@
+@import '../../../styles/variables';
+
+.bottomBarContainer {
+	height: 100vh;
+	background: rgba($color: $main-background-dark, $alpha: 1);
+	display: flex;
+	flex: 1;
+	align-items: flex-end;
+	justify-content: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+
+	.btnList {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+		display: flex;
+		margin: 0 auto;
+		margin-bottom: 5vw;
+		width: 80%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		max-height: 15vh;
+	}
+}

@@ -1,0 +1,20 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins/box-shadow';
+
+.layoutRootContainer {
+	@include box-shadow(
+		1px,
+		1px,
+		10px,
+		rgba($color: $main-background-dark, $alpha: 0.5)
+	);
+	height: 100%;
+	background: rgba($color: #ffffff, $alpha: 1);
+	position: absolute;
+	left: 0;
+	z-index: 9;
+	max-height: calc(100vh - 15vh);
+	width: 100%;
+	border-bottom-left-radius: 50px;
+	border-bottom-right-radius: 50px;
+}
