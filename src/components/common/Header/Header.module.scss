@@ -1,0 +1,53 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins/typography';
+
+.headerRoot {
+	height: 20vw;
+	background: transparent;
+	display: flex;
+	align-items: center;
+	margin: 0 20px;
+
+	.left {
+		display: flex;
+		align-items: stretch;
+		flex: 1;
+
+		.day {
+			font-family: 'Dela Gothic One', cursive;
+			font-size: 13vw;
+			margin-right: 10px;
+		}
+
+		.date {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: center;
+			position: relative;
+			top: 2px;
+
+			p {
+				@include paragraph(16px, $main-background-dark);
+			}
+		}
+	}
+
+	.right {
+		.qrCodeIcon {
+			border: none;
+			background: none;
+			width: 40px;
+			height: 30px;
+			display: flex;
+
+			&:focus {
+				outline: none;
+			}
+
+			img {
+				max-width: 100%;
+			}
+		}
+	}
+}

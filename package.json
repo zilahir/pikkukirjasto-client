@@ -13,6 +13,7 @@
     "carbon-components-react": "^7.32.0",
     "carbon-icons": "^7.0.7",
     "classnames": "^2.3.1",
+    "date-fns": "^2.19.0",
     "framer-motion": "^4.1.2",
     "hex-to-rgba": "^2.0.1",
     "node-sass": "^5.0.0",
