@@ -9,6 +9,8 @@ import styles from './Home.module.scss'
 import { oneBook } from '../../../../api/book/book'
 import Modal from '../../../common/Modal'
 
+import HomeContext from './context/homeContect'
+
 const Home = () => {
 	const books = Array.from({ length: 10 })
 		.fill()
@@ -18,46 +20,60 @@ const Home = () => {
 		}))
 
 	const [isBorrowingModalVisible, toggleBorrowingModal] = useState(false)
+	const [selectedBook, setSelectedBook] = useState()
+
+	/**
+	 * @param chosenBook
+	 */
+	function handleClick(chosenBook) {
+		toggleBorrowingModal(currentlyVisible => !currentlyVisible)
+		setSelectedBook(chosenBook)
+	}
 	return (
 		<>
-			<Layout>
-				<Header />
-				<div className={styles.bookContainer}>
-					<Carousel
-						offset={10}
-						itemWidth={200}
-						plugins={[
-							{
-								resolve: slidesToShowPlugin,
-								options: {
-									numberOfSlides: 3,
-								},
-							},
-						]}
-					>
-						{books.map(({ title, key, author, isbn, cover }) => (
-							<Book
-								onClick={() =>
-									toggleBorrowingModal(currentlyVisible => !currentlyVisible)
-								}
-								key={key}
-								book={{
-									title,
-									author,
-									isbn,
-									cover,
-								}}
-							/>
-						))}
-					</Carousel>
-				</div>
-			</Layout>
-			<Modal
-				handleClose={() => toggleBorrowingModal(false)}
-				isVisible={isBorrowingModalVisible}
+			<HomeContext.Provider
+				value={{
+					setSelectedBook,
+					selectedBook,
+				}}
 			>
-				<h1>lofasz</h1>
-			</Modal>
+				<Layout>
+					<Header />
+					<div className={styles.bookContainer}>
+						<Carousel
+							offset={10}
+							itemWidth={200}
+							plugins={[
+								{
+									resolve: slidesToShowPlugin,
+									options: {
+										numberOfSlides: 3,
+									},
+								},
+							]}
+						>
+							{books.map(currentBook => (
+								<Book
+									onClick={() => handleClick(currentBook)}
+									key={currentBook.key}
+									book={{
+										title: currentBook.title,
+										author: currentBook.author,
+										isbn: currentBook.isbn,
+										cover: currentBook.cover,
+									}}
+								/>
+							))}
+						</Carousel>
+					</div>
+				</Layout>
+				<Modal
+					handleClose={() => toggleBorrowingModal(false)}
+					isVisible={isBorrowingModalVisible}
+				>
+					{isBorrowingModalVisible && <h1>{selectedBook.title}</h1>}
+				</Modal>
+			</HomeContext.Provider>
 		</>
 	)
 }
