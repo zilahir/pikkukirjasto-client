@@ -15,7 +15,6 @@
 		justify-content: center;
 		flex-direction: column;
 		color: #fff;
-		padding-bottom: 15px;
 		transition: all 0.2s ease-in-out;
 
 		&.active {
@@ -26,7 +25,7 @@
 		}
 
 		svg {
-			margin-bottom: 10px;
+			margin-bottom: 5px;
 		}
 
 		span {
@@ -43,7 +42,7 @@
 		height: 4px;
 		background: rgba($color: $tab-bar-color, $alpha: 1);
 		position: absolute;
-		bottom: 0;
+		bottom: -10px;
 		left: 0;
 	}
 }
