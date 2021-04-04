@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
 import axios from 'axios'
+import { useSnackbar } from 'react-simple-snackbar'
 import styles from './EditModal.module.scss'
 import adminContext from '../../context/adminContext'
 import UploadFile from '../../../components/common/UploadFile'
@@ -17,6 +18,7 @@ const EditModal = ({ isVisible, handleClose }) => {
 	const [isbn, setIsbn] = useState(false)
 	const [bookCover, setBookCover] = useState(false)
 	const [isSaved, setIsSaved] = useState(false)
+	const [openSnackbar, closeSnackbar] = useSnackbar()
 
 	/**
 	 *
@@ -41,6 +43,7 @@ const EditModal = ({ isVisible, handleClose }) => {
 		}
 		axios.post(apiEndpoints.saveBook, newBook).then(result => {
 			setIsSaved(true)
+			openSnackbar(`${title} book is successfully added!`)
 		})
 	}
 

@@ -3,6 +3,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { ClientContextProvider } from 'react-fetching-library'
+import SnackbarProvider from 'react-simple-snackbar'
 
 import './index.css'
 import App from './app'
@@ -12,9 +13,11 @@ import client from './api/client'
 ReactDOM.render(
 	<React.StrictMode>
 		<ClientContextProvider client={client}>
-			<Router>
-				<App />
-			</Router>
+			<SnackbarProvider>
+				<Router>
+					<App />
+				</Router>
+			</SnackbarProvider>
 		</ClientContextProvider>
 	</React.StrictMode>,
 	document.querySelector('#root'),

@@ -4,13 +4,21 @@
 
 .oneBook {
 	padding: 20px;
+
+	&.borrowed {
+		.cover {
+			img {
+				filter: grayscale(100%);
+			}
+		}
+	}
 	.cover {
 		position: relative;
+		overflow: hidden;
 
 		img {
 			max-width: 100%;
 			border-radius: 20px;
-			filter: grayscale(100%);
 		}
 
 		.borrowed {

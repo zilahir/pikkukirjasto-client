@@ -54,8 +54,23 @@
 	.metaContainer {
 		padding: 10px;
 		border-radius: 10px;
-		background: rgba($color: #ccc, $alpha: 1);
+		background: rgba($color: $warning-bg-color, $alpha: 1);
 		margin: 40px 0;
+		height: 30px;
+		display: flex;
+		align-items: center;
+
+		p {
+			@include paragraph(18px, rgba($main-background-dark, 1));
+			height: inherit;
+			display: flex;
+			align-items: center;
+			font-weight: 500;
+
+			svg {
+				margin: 0 10px;
+			}
+		}
 	}
 }
 

@@ -26,8 +26,6 @@ const Borrow = () => {
 		if (data) {
 			try {
 				const json = dJSON.parse(data)
-				console.debug('data', data)
-				console.debug('json', json)
 				if (has(json, 'isbn') && role === 'borrow') {
 					axios
 						.post(apiEndpoints.createNewBorrow, {
@@ -39,9 +37,8 @@ const Borrow = () => {
 				} else if (has(json, 'isbn') && role === 'return') {
 					// TODO: return the book here
 				}
-			} catch (error) {
+			} catch {
 				toggleError(true)
-				console.debug('error', error)
 			}
 			setIsbn(data)
 		}
