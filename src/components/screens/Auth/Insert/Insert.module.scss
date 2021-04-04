@@ -1,0 +1,80 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins/typography';
+
+.outerRootContainer {
+	padding: 40px 30px;
+
+	.header {
+		.title {
+			@include heading() {
+				font-size: 28px;
+			}
+		}
+
+		.subTitle {
+			@include paragraph(16px, rgba($main-background-dark, 0.8));
+			margin: 10px 0;
+		}
+	}
+
+	.addContainer {
+		margin-top: 40px;
+		ol {
+			li {
+				@include paragraph(20px, rgba($main-background-dark, 0.8));
+			}
+		}
+
+		.inputContainer {
+			margin-top: 10px;
+			margin-bottom: 40px;
+
+			.error {
+				padding: 4px 8px;
+				border-radius: 4px;
+				background: rgba($color: $error-bg-color, $alpha: 1);
+				color: #ffffff;
+				margin: 10px 0;
+			}
+
+			.isbnInput {
+				width: 100%;
+				height: 50px;
+				border: 0;
+				border-bottom: 2px solid $pink-color;
+				transition: all 0.2s ease-in-out;
+				@include paragraph(20px, rgba($main-background-dark, 0.8));
+				padding-left: 10px;
+
+				&:focus {
+					outline: none;
+					background: rgba($color: $pink-color, $alpha: 1);
+					border-radius: 4px;
+				}
+			}
+		}
+
+		.buttonContainer {
+			margin: 10px 0;
+
+			button {
+				@include paragraph(20px, rgba(#ffffff, 0.8));
+				background: rgba($color: $main-background-dark, $alpha: 1);
+				border: 0;
+				box-shadow: none;
+				width: 100%;
+				padding: 8px 0;
+				border-radius: 10px;
+				height: 50px;
+
+				&:disabled {
+					background: rgba($color: $main-background-dark, $alpha: 0.5);
+				}
+
+				&:focus {
+					outline: none;
+				}
+			}
+		}
+	}
+}
