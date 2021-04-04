@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel'
 import '@brainhubeu/react-carousel/lib/style.css'
 import 'carbon-components/css/carbon-components.min.css'
 import { Button } from 'carbon-components-react'
 import { useQuery } from 'react-fetching-library'
 
+import axios from 'axios'
 import Book from '../../../common/Book'
 import Header from '../../../common/Header'
 import Layout from '../../../common/Layout'
@@ -34,6 +35,7 @@ const Home = () => {
 
 	const [isBorrowingModalVisible, toggleBorrowingModal] = useState(false)
 	const [selectedBook, setSelectedBook] = useState()
+	const [borrowHistory, setBorrowHistory] = useState([])
 
 	/**
 	 * @param chosenBook
@@ -42,6 +44,17 @@ const Home = () => {
 		toggleBorrowingModal(currentlyVisible => !currentlyVisible)
 		setSelectedBook(chosenBook)
 	}
+
+	useEffect(() => {
+		axios.get(apiEndpoints.getBorrowHistory).then(result => {
+			setBorrowHistory(result.data)
+		})
+	}, [])
+
+	const isBorrowed = isbn =>
+		borrowHistory.some(
+			borrow => borrow.isbn === isbn && borrow.isBorrowed === true,
+		)
 
 	return (
 		<>
@@ -72,6 +85,7 @@ const Home = () => {
 									<Book
 										onClick={() => handleClick(currentBook)}
 										key={currentBook.key}
+										isBorrowed={isBorrowed(currentBook.isbn)}
 										book={{
 											title: currentBook.title,
 											author: currentBook.author,

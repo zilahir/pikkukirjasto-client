@@ -3,6 +3,7 @@ import { useHistory } from 'react-router'
 import HomeIcon from '@material-ui/icons/Home'
 import HowToVoteIcon from '@material-ui/icons/HowToVote'
 import MenuBookIcon from '@material-ui/icons/MenuBook'
+import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn'
 
 // import UploadFile from '../UploadFile'
 
@@ -19,15 +20,21 @@ const BOTTOM_NAV = [
 	},
 	{
 		key: 2,
-		label: 'Add book',
+		label: 'Add new',
 		icon: <HowToVoteIcon htmlColor="#ffffff" fontSize="large" />,
 		path: '/add',
 	},
 	{
 		key: 3,
-		label: 'Borrow book',
+		label: 'Borrow',
 		icon: <MenuBookIcon htmlColor="#ffffff" fontSize="large" />,
 		path: '/borrow',
+	},
+	{
+		key: 4,
+		label: 'Return',
+		icon: <KeyboardReturnIcon htmlColor="#ffffff" fontSize="large" />,
+		path: '/return',
 	},
 ]
 

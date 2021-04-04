@@ -1,5 +1,6 @@
 import { format } from 'date-fns'
 import React, { useState } from 'react'
+import { useHistory } from 'react-router'
 
 import qrCodeIcon from '../../../assets/icons/qr-code.svg'
 import Modal from '../Modal'
@@ -7,6 +8,7 @@ import styles from './Header.module.scss'
 
 const Header = () => {
 	const [isScanModalVisible, toggleScanModalVisible] = useState(false)
+	const history = useHistory()
 	return (
 		<>
 			<div className={styles.headerRoot}>
@@ -21,7 +23,7 @@ const Header = () => {
 					<button
 						className={styles.qrCodeIcon}
 						type="button"
-						onClick={() => console.debug('pressed')}
+						onClick={() => history.push('/borrow')}
 					>
 						<img src={qrCodeIcon} alt="read-qr" />
 					</button>

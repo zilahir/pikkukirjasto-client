@@ -5,9 +5,23 @@
 .oneBook {
 	padding: 10px;
 	.cover {
+		position: relative;
+
 		img {
 			max-width: 40vw;
 			border-radius: 20px;
+		}
+
+		.borrowed {
+			position: absolute;
+			color: #fff;
+			padding: 4px 8px;
+			border-radius: 4px;
+			top: 50%;
+			background: $error-bg-color;
+			margin: 0 auto;
+			width: 100%;
+			text-align: center;
 		}
 	}
 
@@ -21,5 +35,9 @@
 		p {
 			@include paragraph(18px, rgba($main-background-dark, 0.6));
 		}
+	}
+
+	&.borrowed {
+		// opacity: 0.4;
 	}
 }
