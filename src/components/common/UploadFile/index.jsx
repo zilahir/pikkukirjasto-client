@@ -9,10 +9,9 @@ import apiEndpoints from '../../../api/apiEndPoints'
 
 const UploadFile = ({ getBackUrl }) => {
 	const onDrop = useCallback(acceptedFiles => {
-		const isbn = 'lofsaz'
 		const image = acceptedFiles[0]
 		const formData = new FormData()
-		const file = new File([image], `${isbn}__${shortid.generate()}.jpg`, {
+		const file = new File([image], `${shortid.generate()}.jpg`, {
 			type: 'image/jpeg',
 		})
 		formData.append('image', file)
@@ -44,6 +43,8 @@ const UploadFile = ({ getBackUrl }) => {
 		</div>
 	)
 }
+
+UploadFile.defaultProps = {}
 
 UploadFile.propTypes = {
 	getBackUrl: PropTypes.func.isRequired,

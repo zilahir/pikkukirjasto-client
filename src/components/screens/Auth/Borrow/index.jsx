@@ -4,8 +4,9 @@ import { has } from 'lodash'
 import QrReader from 'modern-react-qr-reader'
 import { useLocation } from 'react-router'
 import axios from 'axios'
-import Layout from '../../../common/Layout'
+import dJSON from 'dirty-json'
 
+import Layout from '../../../common/Layout'
 import styles from './Borrow.module.scss'
 import apiEndpoints from '../../../../api/apiEndPoints'
 
@@ -24,7 +25,9 @@ const Borrow = () => {
 			: 'return'
 		if (data) {
 			try {
-				const json = JSON.parse(data)
+				const json = dJSON.parse(data)
+				console.debug('data', data)
+				console.debug('json', json)
 				if (has(json, 'isbn') && role === 'borrow') {
 					axios
 						.post(apiEndpoints.createNewBorrow, {
@@ -36,8 +39,9 @@ const Borrow = () => {
 				} else if (has(json, 'isbn') && role === 'return') {
 					// TODO: return the book here
 				}
-			} catch {
+			} catch (error) {
 				toggleError(true)
+				console.debug('error', error)
 			}
 			setIsbn(data)
 		}
@@ -45,7 +49,7 @@ const Borrow = () => {
 	return (
 		<Layout>
 			<div className={styles.borrowContainer}>
-				<QrReader delay={300} onScan={handleQrRead} />
+				<QrReader delay={3000} onScan={handleQrRead} />
 				<p>isbn: {isbn}</p>
 			</div>
 		</Layout>

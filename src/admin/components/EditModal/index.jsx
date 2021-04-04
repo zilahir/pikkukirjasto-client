@@ -79,16 +79,19 @@ const EditModal = ({ isVisible, handleClose }) => {
 									type="text"
 									onChange={event => setTitle(event.target.value)}
 									placeholder="Title of the book"
+									value={title || ''}
 								/>
 								<input
 									type="text"
 									onChange={event => setAuthor(event.target.value)}
 									placeholder="Author of the book"
+									value={author || ''}
 								/>
 								<input
 									type="text"
 									onChange={event => setIsbn(event.target.value)}
 									placeholder="ISBN"
+									value={isbn || ''}
 								/>
 								<UploadFile getBackUrl={url => handleBookCover(url)} />
 							</div>
