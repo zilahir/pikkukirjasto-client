@@ -10,6 +10,7 @@ const apiEndpoints = {
 	getAllBooks: `${apiRoot}/book/all`,
 	getBorrowHistory: `${apiRoot}/borrow/all`,
 	createNewBorrow: `${apiRoot}/borrow/new`,
+	returnBook: `${apiRoot}/borrow/return`,
 }
 
 export default apiEndpoints

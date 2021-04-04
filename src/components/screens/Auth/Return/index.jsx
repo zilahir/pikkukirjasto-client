@@ -7,7 +7,7 @@ import axios from 'axios'
 import dJSON from 'dirty-json'
 
 import Layout from '../../../common/Layout'
-import styles from './Borrow.module.scss'
+import styles from '../Borrow/Borrow.module.scss'
 import apiEndpoints from '../../../../api/apiEndPoints'
 
 const Borrow = () => {
@@ -20,22 +20,17 @@ const Borrow = () => {
 	 * @param data
 	 */
 	function handleQrRead(data) {
-		const role = currentLocation.pathname.includes('borrow')
-			? 'borrow'
-			: 'return'
 		if (data) {
 			try {
 				const json = dJSON.parse(data)
-				if (has(json, 'isbn') && role === 'borrow') {
+				if (has(json, 'isbn')) {
 					axios
-						.post(apiEndpoints.createNewBorrow, {
+						.patch(apiEndpoints.returnBook, {
 							isbn: json.isbn,
 						})
 						.then(() => {
 							toggleSuccess(true)
 						})
-				} else if (has(json, 'isbn') && role === 'return') {
-					// TODO: return the book here
 				}
 			} catch {
 				toggleError(true)

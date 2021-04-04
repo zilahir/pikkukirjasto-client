@@ -9,8 +9,8 @@ import Notification from './components/Notification'
 import Borrow from './components/screens/Auth/Borrow'
 import Home from './components/screens/Auth/Home'
 import Insert from './components/screens/Auth/Insert'
-
 import OnBoad from './components/screens/OnBoard'
+import ReturnScreen from './components/screens/Auth/Return'
 
 /**
  *
@@ -28,6 +28,7 @@ function App() {
 				<Route exact path="/add" component={Insert} />
 				<Route exact path="/admin" component={Admin} />
 				<Route exact path="/new" component={New} />
+				<Route exact path="/return" component={ReturnScreen} />
 			</Switch>
 			{!location.pathname.includes('admin') &&
 				!location.pathname.includes('new') && <BottomBar />}
