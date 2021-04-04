@@ -1,7 +1,8 @@
 @import '../../../styles/variables';
 
 .bottomBarContainer {
-	height: 100vh;
+	height: 100%;
+	overflow: hidden;
 	background: rgba($color: $main-background-dark, $alpha: 1);
 	display: flex;
 	flex: 1;

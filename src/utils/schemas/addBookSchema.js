@@ -1,7 +1,7 @@
 import Joi from 'joi'
 
 export const addBookSchema = Joi.object({
-	isbn: Joi.number().required().min(10),
+	isbn: [Joi.number().required().min(10), Joi.string().required().min(10)],
 })
 
 export const imageSchemma = Joi.object({

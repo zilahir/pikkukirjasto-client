@@ -3,6 +3,10 @@
 
 .outerRootContainer {
 	padding: 40px 30px;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	height: 100%;
 
 	.header {
 		.title {
@@ -19,6 +23,8 @@
 
 	.addContainer {
 		margin-top: 40px;
+		flex: 1;
+
 		ol {
 			li {
 				@include paragraph(20px, rgba($main-background-dark, 0.8));
@@ -53,28 +59,8 @@
 				}
 			}
 		}
-
-		.buttonContainer {
-			margin: 10px 0;
-
-			button {
-				@include paragraph(20px, rgba(#ffffff, 0.8));
-				background: rgba($color: $main-background-dark, $alpha: 1);
-				border: 0;
-				box-shadow: none;
-				width: 100%;
-				padding: 8px 0;
-				border-radius: 10px;
-				height: 50px;
-
-				&:disabled {
-					background: rgba($color: $main-background-dark, $alpha: 0.5);
-				}
-
-				&:focus {
-					outline: none;
-				}
-			}
-		}
+	}
+	.buttonContainer {
+		margin: 10px 0;
 	}
 }

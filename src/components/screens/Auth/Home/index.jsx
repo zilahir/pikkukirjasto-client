@@ -42,6 +42,7 @@ const Home = () => {
 				<Layout>
 					<Header />
 					<div className={styles.bookContainer}>
+						<h1>Avaliable books</h1>
 						<Carousel
 							offset={10}
 							itemWidth={200}

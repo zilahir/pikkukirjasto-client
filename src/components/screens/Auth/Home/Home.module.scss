@@ -2,9 +2,26 @@
 @import '../../../../styles/mixins/typography';
 
 .bookContainer {
-	height: calc(100vh - 25vh);
+	height: calc(100% - 10vh);
 	display: flex;
-	align-items: center;
+	flex-direction: column;
+
+	h1 {
+		@include heading() {
+			font-size: 26px;
+			color: $main-background-dark;
+			margin: 0 20px;
+			margin-bottom: 40px;
+			margin-top: 20px;
+		}
+	}
+
+	div[class^='BrainhubCarousel__'] {
+		height: fit-content;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
 }
 
 .modalInner {
@@ -40,4 +57,8 @@
 		background: rgba($color: #ccc, $alpha: 1);
 		margin: 40px 0;
 	}
+}
+
+.carouselContainer {
+	height: 100%;
 }
