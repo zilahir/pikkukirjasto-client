@@ -16,7 +16,7 @@ import cleanIsbn from '../../../../utils/helpers/cleanIsbn'
 const Borrow = () => {
 	const [isbn, setIsbn] = useState()
 	const [isError, toggleError] = useState(false)
-	const [isSuccess, toggleSuccess] = useState(true)
+	const [isSuccess, toggleSuccess] = useState(false)
 	const history = useHistory()
 
 	/**
@@ -46,6 +46,7 @@ const Borrow = () => {
 	 *
 	 */
 	function goBack() {
+		toggleSuccess(false)
 		history.push('/')
 	}
 	return (

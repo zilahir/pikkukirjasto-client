@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { has } from 'lodash'
 import classnames from 'classnames'
 import QrReader from 'modern-react-qr-reader'
-import { useLocation } from 'react-router'
+import { useHistory, useLocation } from 'react-router'
 import axios from 'axios'
 import dJSON from 'dirty-json'
 
@@ -11,12 +11,14 @@ import Layout from '../../../common/Layout'
 import styles from '../Borrow/Borrow.module.scss'
 import apiEndpoints from '../../../../api/apiEndPoints'
 import cleanIsbn from '../../../../utils/helpers/cleanIsbn'
+import Button from '../../../common/Button'
 
 const Borrow = () => {
 	const [isbn, setIsbn] = useState()
 	const [isError, toggleError] = useState(false)
 	const currentLocation = useLocation()
 	const [isSuccess, toggleSuccess] = useState(false)
+	const history = useHistory()
 
 	/**
 	 * @param data
@@ -40,6 +42,14 @@ const Borrow = () => {
 			setIsbn(data)
 		}
 	}
+
+	/**
+	 *
+	 */
+	function goBack() {
+		toggleSuccess(false)
+		history.push('/')
+	}
 	return (
 		<Layout>
 			<div
@@ -53,6 +63,9 @@ const Borrow = () => {
 					<div className={styles.successContainer}>
 						<div className={styles.innerContanier}>
 							<p>Thank you for returning the book! ❤️</p>
+							<div className={styles.btnContainer}>
+								<Button label="Go Back" onClick={() => goBack()} />
+							</div>
 						</div>
 					</div>
 				)}

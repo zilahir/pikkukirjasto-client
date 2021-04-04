@@ -68,7 +68,7 @@ const Home = () => {
 			})
 			.then(() => {
 				toggleBorrowingModal(false)
-				openSnackbar('You have borrowed this book', 50000)
+				openSnackbar('You have borrowed this book', 3000)
 			})
 	}
 
