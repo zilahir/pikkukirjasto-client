@@ -1,4 +1,7 @@
-const apiRoot = 'https://aibch3zo5c.execute-api.eu-west-1.amazonaws.com/dev/api'
+const apiRoot =
+	process.env.NODE_ENV === 'development'
+		? 'http://localhost:5000/api'
+		: 'https://aibch3zo5c.execute-api.eu-west-1.amazonaws.com/dev/api'
 
 const apiEndpoints = {
 	uploadImage: `${apiRoot}/file/upload`,

@@ -19,7 +19,8 @@ const UploadFile = ({ getBackUrl }) => {
 		axios
 			.post(apiEndpoints.uploadImage, formData, {
 				headers: {
-					Accept: 'multipart/form-data',
+					// Accept: 'multipart/form-data',
+					'content-type': 'multipart/form-data',
 				},
 			})
 			.then(result => {
