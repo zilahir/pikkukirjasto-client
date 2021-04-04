@@ -15,25 +15,25 @@ const BOTTOM_NAV = [
 	{
 		key: 1,
 		label: 'Home',
-		icon: <HomeIcon htmlColor="#ffffff" fontSize="large" />,
+		icon: <HomeIcon htmlColor="#ffffff" fontSize="medium" />,
 		path: '/',
 	},
 	{
 		key: 2,
 		label: 'Add new',
-		icon: <HowToVoteIcon htmlColor="#ffffff" fontSize="large" />,
+		icon: <HowToVoteIcon htmlColor="#ffffff" fontSize="medium" />,
 		path: '/add',
 	},
 	{
 		key: 3,
 		label: 'Borrow',
-		icon: <MenuBookIcon htmlColor="#ffffff" fontSize="large" />,
+		icon: <MenuBookIcon htmlColor="#ffffff" fontSize="medium" />,
 		path: '/borrow',
 	},
 	{
 		key: 4,
 		label: 'Return',
-		icon: <KeyboardReturnIcon htmlColor="#ffffff" fontSize="large" />,
+		icon: <KeyboardReturnIcon htmlColor="#ffffff" fontSize="medium" />,
 		path: '/return',
 	},
 ]
