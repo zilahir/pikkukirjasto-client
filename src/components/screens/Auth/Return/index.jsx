@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import { has } from 'lodash'
+import classnames from 'classnames'
 import QrReader from 'modern-react-qr-reader'
 import { useLocation } from 'react-router'
 import axios from 'axios'
@@ -23,7 +24,7 @@ const Borrow = () => {
 		if (data) {
 			try {
 				const json = dJSON.parse(data)
-				if (has(json, 'isbn')) {
+				if (has(json, 'isbn') && !isSuccess) {
 					axios
 						.patch(apiEndpoints.returnBook, {
 							isbn: json.isbn,
@@ -40,8 +41,20 @@ const Borrow = () => {
 	}
 	return (
 		<Layout>
-			<div className={styles.borrowContainer}>
-				<QrReader delay={3000} onScan={handleQrRead} />
+			<div
+				className={classnames(
+					styles.borrowContainer,
+					isSuccess ? styles.extend : '',
+				)}
+			>
+				{!isSuccess && <QrReader delay={3000} onScan={handleQrRead} />}
+				{isSuccess && (
+					<div className={styles.successContainer}>
+						<div className={styles.innerContanier}>
+							<p>Thank you for returning the book! ❤️</p>
+						</div>
+					</div>
+				)}
 			</div>
 		</Layout>
 	)

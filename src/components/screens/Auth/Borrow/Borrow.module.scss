@@ -1,3 +1,27 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins/typography';
+
 .borrowContainer {
 	padding: 20px;
+
+	&.extend {
+		height: 100%;
+	}
+}
+
+.successContainer {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.innerContanier {
+		background: rgba($color: $pink-color, $alpha: 1);
+		padding: 50px;
+		border-radius: 10px;
+
+		p {
+			@include paragraph(22px, $main-background-dark);
+		}
+	}
 }
