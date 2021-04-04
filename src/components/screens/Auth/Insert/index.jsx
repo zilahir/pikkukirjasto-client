@@ -124,7 +124,7 @@ const Insert = () => {
 				isVisible={isCameraOn}
 				handleClose={() => toggleCameraOn(false)}
 			>
-				<Camera isOpen={isCameraOn} />
+				<Camera isbn={isbn} isOpen={isCameraOn} />
 			</Modal>
 		</>
 	)

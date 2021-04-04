@@ -11,7 +11,7 @@ const UploadFile = () => {
 		const isbn = 'lofsaz'
 		const image = acceptedFiles[0]
 		const formData = new FormData()
-		const file = new File([image], `${isbn}-${shortid.generate()}.jpg`, {
+		const file = new File([image], `${isbn}__${shortid.generate()}.jpg`, {
 			type: 'image/jpeg',
 		})
 		formData.append('image', file)

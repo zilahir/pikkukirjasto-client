@@ -31,6 +31,7 @@
     "react-dropzone": "^11.3.2",
     "react-hook-form": "^6.13.1",
     "react-i18next": "^11.8.12",
+    "react-qr-code": "^1.1.1",
     "react-qr-reader": "^2.2.1",
     "react-redux": "^7.2.3",
     "react-router": "^5.2.0",
