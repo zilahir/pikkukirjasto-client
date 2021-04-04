@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/consistent-function-scoping */
 import React, { useEffect, useState } from 'react'
 import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel'
 import '@brainhubeu/react-carousel/lib/style.css'
@@ -72,6 +73,13 @@ const Home = () => {
 			})
 	}
 
+	/**
+	 *
+	 */
+	function viewAllBooks() {
+		console.debug('search')
+	}
+
 	return (
 		<>
 			<HomeContext.Provider
@@ -83,7 +91,16 @@ const Home = () => {
 				<Layout>
 					<Header />
 					<div className={styles.bookContainer}>
-						<h1>Avaliable books</h1>
+						<div className={styles.header}>
+							<h1>Avaliable books</h1>{' '}
+							<button
+								type="button"
+								onClick={() => viewAllBooks()}
+								className={styles.viewAll}
+							>
+								Search
+							</button>
+						</div>
 						<Carousel
 							offset={10}
 							itemWidth={200}
