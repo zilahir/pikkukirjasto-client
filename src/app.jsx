@@ -3,7 +3,9 @@ import { AnimatePresence } from 'framer-motion'
 import React from 'react'
 import { Switch, Route, useLocation } from 'react-router-dom'
 import Admin from './admin'
+import New from './admin/New'
 import BottomBar from './components/common/BottomBar'
+import Notification from './components/Notification'
 import Borrow from './components/screens/Auth/Borrow'
 import Home from './components/screens/Auth/Home'
 import Insert from './components/screens/Auth/Insert'
@@ -25,8 +27,10 @@ function App() {
 				<Route exact path="/borrow" component={Borrow} />
 				<Route exact path="/add" component={Insert} />
 				<Route exact path="/admin" component={Admin} />
+				<Route exact path="/new" component={New} />
 			</Switch>
-			<BottomBar />
+			{!location.pathname.includes('admin') &&
+				!location.pathname.includes('new') && <BottomBar />}
 		</AnimatePresence>
 	)
 }

@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel'
 import '@brainhubeu/react-carousel/lib/style.css'
 import 'carbon-components/css/carbon-components.min.css'
 import { Button } from 'carbon-components-react'
+import { useQuery } from 'react-fetching-library'
 
 import Book from '../../../common/Book'
 import Header from '../../../common/Header'
@@ -12,8 +14,17 @@ import { oneBook } from '../../../../api/book/book'
 import Modal from '../../../common/Modal'
 
 import HomeContext from './context/homeContect'
+import apiEndpoints from '../../../../api/apiEndPoints'
+
+const fetchBookList = {
+	method: 'GET',
+	endpoint: apiEndpoints.getAllBooks,
+}
 
 const Home = () => {
+	const { loading, payload, error, query, reset, abort } = useQuery(
+		fetchBookList,
+	)
 	const books = Array.from({ length: 10 })
 		.fill()
 		.map((_, index) => ({
@@ -31,6 +42,7 @@ const Home = () => {
 		toggleBorrowingModal(currentlyVisible => !currentlyVisible)
 		setSelectedBook(chosenBook)
 	}
+
 	return (
 		<>
 			<HomeContext.Provider
@@ -55,18 +67,19 @@ const Home = () => {
 								},
 							]}
 						>
-							{books.map(currentBook => (
-								<Book
-									onClick={() => handleClick(currentBook)}
-									key={currentBook.key}
-									book={{
-										title: currentBook.title,
-										author: currentBook.author,
-										isbn: currentBook.isbn,
-										cover: currentBook.cover,
-									}}
-								/>
-							))}
+							{!loading &&
+								payload.map(currentBook => (
+									<Book
+										onClick={() => handleClick(currentBook)}
+										key={currentBook.key}
+										book={{
+											title: currentBook.title,
+											author: currentBook.author,
+											isbn: currentBook.isbn,
+											cover: currentBook.cover,
+										}}
+									/>
+								))}
 						</Carousel>
 					</div>
 				</Layout>

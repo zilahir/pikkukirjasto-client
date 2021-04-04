@@ -12,7 +12,7 @@ import Camera from '../../../common/Camera'
 import Modal from '../../../common/Modal'
 
 const Insert = () => {
-	const [isbn, setIsbn] = useState('978-951-0-42301-1')
+	const [isbn, setIsbn] = useState('')
 	const [isCameraOn, toggleCameraOn] = useState(false)
 	const { register, trigger, setValue, errors } = useForm({
 		resolver: joiResolver(addBookSchema),
@@ -124,7 +124,11 @@ const Insert = () => {
 				isVisible={isCameraOn}
 				handleClose={() => toggleCameraOn(false)}
 			>
-				<Camera isbn={isbn} isOpen={isCameraOn} />
+				<Camera
+					handleClose={() => toggleCameraOn(false)}
+					isbn={isbn}
+					isOpen={isCameraOn}
+				/>
 			</Modal>
 		</>
 	)
