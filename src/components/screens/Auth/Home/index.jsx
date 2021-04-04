@@ -5,6 +5,7 @@ import { useQuery } from 'react-fetching-library'
 import WarningOutlinedIcon from '@material-ui/icons/WarningOutlined'
 
 import axios from 'axios'
+import { useSnackbar } from 'react-simple-snackbar'
 import Book from '../../../common/Book'
 import Header from '../../../common/Header'
 import Layout from '../../../common/Layout'
@@ -14,6 +15,7 @@ import Modal from '../../../common/Modal'
 import HomeContext from './context/homeContect'
 import apiEndpoints from '../../../../api/apiEndPoints'
 import Button from '../../../common/Button'
+import cleanIsbn from '../../../../utils/helpers/cleanIsbn'
 
 const fetchBookList = {
 	method: 'GET',
@@ -26,10 +28,17 @@ const Home = () => {
 	const [isBorrowingModalVisible, toggleBorrowingModal] = useState(false)
 	const [selectedBook, setSelectedBook] = useState()
 	const [borrowHistory, setBorrowHistory] = useState([])
+	const [openSnackbar] = useSnackbar({
+		style: {
+			width: '100%',
+			backgroundColor: 'green',
+			height: '5vh',
+		},
+	})
 
 	const isBorrowed = isbn =>
 		borrowHistory.some(
-			borrow => borrow.isbn === isbn && borrow.isBorrowed === true,
+			borrow => cleanIsbn(borrow.isbn) === isbn && borrow.isBorrowed === true,
 		)
 
 	/**
@@ -55,10 +64,11 @@ const Home = () => {
 	function handleBorrow() {
 		axios
 			.post(apiEndpoints.createNewBorrow, {
-				isbn: selectedBook.isbn,
+				isbn: cleanIsbn(selectedBook.isbn),
 			})
 			.then(() => {
-				console.debug('borrowed', true)
+				toggleBorrowingModal(false)
+				openSnackbar('You have borrowed this book', 50000)
 			})
 	}
 
@@ -91,11 +101,11 @@ const Home = () => {
 									<Book
 										onClick={() => handleClick(currentBook)}
 										key={currentBook.key}
-										isBorrowed={isBorrowed(currentBook.isbn)}
+										isBorrowed={isBorrowed(cleanIsbn(currentBook.isbn))}
 										book={{
 											title: currentBook.title,
 											author: currentBook.author,
-											isbn: currentBook.isbn,
+											isbn: cleanIsbn(currentBook.isbn),
 											cover: currentBook.cover,
 										}}
 									/>

@@ -10,6 +10,7 @@ import dJSON from 'dirty-json'
 import Layout from '../../../common/Layout'
 import styles from '../Borrow/Borrow.module.scss'
 import apiEndpoints from '../../../../api/apiEndPoints'
+import cleanIsbn from '../../../../utils/helpers/cleanIsbn'
 
 const Borrow = () => {
 	const [isbn, setIsbn] = useState()
@@ -27,7 +28,7 @@ const Borrow = () => {
 				if (has(json, 'isbn') && !isSuccess) {
 					axios
 						.patch(apiEndpoints.returnBook, {
-							isbn: json.isbn,
+							isbn: cleanIsbn(json.isbn),
 						})
 						.then(() => {
 							toggleSuccess(true)

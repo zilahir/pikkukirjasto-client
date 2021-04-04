@@ -20,6 +20,10 @@
 		padding: 50px;
 		border-radius: 10px;
 
+		.btnContainer {
+			margin-top: 20px;
+		}
+
 		p {
 			@include paragraph(22px, $main-background-dark);
 		}

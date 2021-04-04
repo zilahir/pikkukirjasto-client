@@ -2,40 +2,38 @@
 import React, { useState } from 'react'
 import { has } from 'lodash'
 import QrReader from 'modern-react-qr-reader'
-import { useLocation } from 'react-router'
+import { useHistory, useLocation } from 'react-router'
 import axios from 'axios'
 import dJSON from 'dirty-json'
+import classnames from 'classnames'
 
 import Layout from '../../../common/Layout'
 import styles from './Borrow.module.scss'
 import apiEndpoints from '../../../../api/apiEndPoints'
+import Button from '../../../common/Button'
+import cleanIsbn from '../../../../utils/helpers/cleanIsbn'
 
 const Borrow = () => {
 	const [isbn, setIsbn] = useState()
 	const [isError, toggleError] = useState(false)
-	const currentLocation = useLocation()
-	const [isSuccess, toggleSuccess] = useState(false)
+	const [isSuccess, toggleSuccess] = useState(true)
+	const history = useHistory()
 
 	/**
 	 * @param data
 	 */
 	function handleQrRead(data) {
-		const role = currentLocation.pathname.includes('borrow')
-			? 'borrow'
-			: 'return'
 		if (data) {
 			try {
 				const json = dJSON.parse(data)
-				if (has(json, 'isbn') && role === 'borrow') {
+				if (has(json, 'isbn')) {
 					axios
 						.post(apiEndpoints.createNewBorrow, {
-							isbn: json.isbn,
+							isbn: cleanIsbn(json.isbn),
 						})
 						.then(() => {
 							toggleSuccess(true)
 						})
-				} else if (has(json, 'isbn') && role === 'return') {
-					// TODO: return the book here
 				}
 			} catch {
 				toggleError(true)
@@ -43,10 +41,32 @@ const Borrow = () => {
 			setIsbn(data)
 		}
 	}
+
+	/**
+	 *
+	 */
+	function goBack() {
+		history.push('/')
+	}
 	return (
 		<Layout>
-			<div className={styles.borrowContainer}>
-				<QrReader delay={3000} onScan={handleQrRead} />
+			<div
+				className={classnames(
+					styles.borrowContainer,
+					isSuccess ? styles.extend : '',
+				)}
+			>
+				{!isSuccess && <QrReader delay={3000} onScan={handleQrRead} />}
+				{isSuccess && (
+					<div className={styles.successContainer}>
+						<div className={styles.innerContanier}>
+							<p>Thank you for borrowing this book! ❤️</p>
+							<div className={styles.btnContainer}>
+								<Button label="Go Back" onClick={() => goBack()} />
+							</div>
+						</div>
+					</div>
+				)}
 			</div>
 		</Layout>
 	)
