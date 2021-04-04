@@ -55,7 +55,7 @@ const EditModal = ({ isVisible, handleClose }) => {
 	 *
 	 */
 	function checkIfSaveAble() {
-		const logic = [author, title, isbn, bookCover]
+		const logic = [author, title, isbn]
 		const isValid = logic.every(l => l === true)
 		return isValid
 	}
