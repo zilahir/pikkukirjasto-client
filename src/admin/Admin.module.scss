@@ -1,0 +1,75 @@
+$in: green;
+$out: red;
+
+.table {
+	width: 100%;
+
+	thead {
+		background: #ccc;
+	}
+
+	tr {
+		margin: 20px 0;
+
+		&.borrowed {
+			background: rgba($color: $out, $alpha: 0.4);
+		}
+
+		&.notBorrowed {
+			background: rgba($color: $in, $alpha: 0.4);
+		}
+
+		td {
+			border: 2px solid black;
+			img {
+				max-width: 300px;
+			}
+		}
+	}
+}
+
+.adminRoot {
+	max-width: 900px;
+	margin: 0 auto;
+
+	h1 {
+		text-align: center;
+		margin: 20px;
+	}
+
+	.signs {
+		margin: 20px 0;
+		p {
+			position: relative;
+			margin: 0 20px;
+			&:before {
+				content: '';
+				width: 10px;
+				height: 10px;
+				border-radius: 2px;
+				position: absolute;
+				left: -20px;
+				top: 5px;
+			}
+		}
+		.in {
+			&:before {
+				background: $in;
+			}
+		}
+		.out {
+			&:before {
+				background: $out;
+			}
+		}
+	}
+}
+
+.actionBtnContainer {
+	button {
+		display: flex;
+		flex: 1;
+		width: 100%;
+		margin: 5px 0;
+	}
+}
