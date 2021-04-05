@@ -102,7 +102,8 @@ const MobileHome = () => {
 								onClick={() => viewAllBooks()}
 								className={styles.viewAll}
 							>
-								{t('screens.home.search')}
+								{t('screens.home.search')}{' '}
+								<span>({payload ? payload.length : 0})</span>
 							</button>
 						</div>
 						{!loading && (

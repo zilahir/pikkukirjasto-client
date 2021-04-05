@@ -1,4 +1,4 @@
-@import '../../../../../styles/variables';
+@import '../.../../../../../../styles/variables';
 @import '../../../../../styles/mixins/typography';
 
 .bookContainer {
@@ -22,6 +22,13 @@
 			padding: 8px 12px;
 			border-radius: 10px;
 			font-weight: 500;
+			display: flex;
+			align-items: center;
+
+			span {
+				font-size: 14px;
+				margin-left: 5px;
+			}
 
 			&:focus {
 				outline: none;
