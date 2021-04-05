@@ -7,7 +7,7 @@
 	},
 	"screens": {
 		"home": {
-			"avaliable-books": "Avaliable books",
+			"avaliable-books": "Available books",
 			"search": "Search"
 		},
 		"add-new": {
@@ -29,6 +29,12 @@
 		}
 	},
 	"misc": {
-		"read-qr": "Read the QR code"
+		"read-qr": "Read the QR code",
+		"borrowed": "Borrowed",
+		"to-borrow-info": "You are about to borrow",
+		"to-borrow-btn": "To borrow this book press the button below"
+	},
+	"buttons": {
+		"borrow": "Borrow"
 	}
 }

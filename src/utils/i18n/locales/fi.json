@@ -1,34 +1,41 @@
 {
 	"tabs": {
-		"home": "Home",
-		"add-new": "Add new",
-		"borrow": "Borrow",
-		"return": "Return"
+		"home": "Koti",
+		"add-new": "Lisää uusi",
+		"borrow": "Lainaa",
+		"return": "Palauta"
 	},
 	"screens": {
 		"home": {
-			"avaliable-books": "Avaliable books",
-			"search": "Search"
+			"avaliable-books": "Lainattavissa",
+			"search": "Etsi"
 		},
 		"add-new": {
-			"add-new-book": "Add new book",
-			"instructions": "To add a new book into the library, please follow these few easy steps",
-			"step-1": "Type the ISBN number of the book",
-			"step-1-error": "Pleae check the ISBN number you entered",
-			"step-2": "Create a photo of the front cover of the book, using your phone camera",
-			"upload-photo": "Upoad photo"
+			"add-new-book": "Lisää uusi kirja",
+			"instructions": "Lisätäksesi kirjastoon uuden kirjan, seuraa näitä helppoja vaiheita",
+			"step-1": "Kirjoita kirjan ISBN-numero",
+			"step-1-isbn-info": "ISBN-numero löytyy kirjan takakannesta ja/tai kirjan ensimmäiseltä sivulta.",
+			"step-1-error": "Tarkista ISBN-numero.",
+			"step-2": "Ota kuva kirjan kannesta puhelimesi kameralla",
+			"upload-photo": "Lisää kuva"
 		},
 		"borrow": {
-			"thank-you": "Thank you for borrowing this book! ❤️"
+			"thank-you": "Kiitos kun lainasit tämän kirjan! ❤️"
 		},
 		"return": {
-			"thank-you": "Thank you for returning this book! ❤️"
+			"thank-you": "Kiitos kun palautit tämän kirjan! ❤️"
 		},
 		"search": {
-			"search": "Search"
+			"search": "Etsi"
 		}
 	},
 	"misc": {
-		"read-qr": "Read the QR code"
+		"read-qr": "Lue QR-koodi",
+		"borrowed": "Lainassa",
+		"to-borrow-info": "Olet lainaamassa",
+		"to-borrow-btn": "Lainataksesi tämän kirjan, paina alla olevaa painiketta"
+	},
+	"buttons": {
+		"borrow": "Lainaa"
 	}
 }

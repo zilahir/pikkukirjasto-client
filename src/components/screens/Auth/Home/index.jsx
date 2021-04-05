@@ -156,16 +156,19 @@ const Home = () => {
 							<div className={styles.borrowingModal}>
 								<h1 className={styles.modalTitle}>Are you sure?</h1>
 								<p className={styles.subTitle}>
-									You are about to borrow <span>{selectedBook.title}</span>
+									{t('misc.to-borrow-info')} <span>{selectedBook.title}</span>
 								</p>
 								<div className={styles.metaContainer}>
 									<p className={styles.meta}>
-										<WarningOutlinedIcon htmlColor="#060930" /> To borrow this
-										book press the button below
+										<WarningOutlinedIcon htmlColor="#060930" />{' '}
+										{t('misc.to-borrow-btn')}
 									</p>
 								</div>
 							</div>
-							<Button label="Borrow" onClick={() => handleBorrow()} />
+							<Button
+								label={t('buttons.borrow')}
+								onClick={() => handleBorrow()}
+							/>
 						</>
 					)}
 				</Modal>
