@@ -1,6 +1,7 @@
 /* eslint-disable unicorn/consistent-function-scoping */
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
+import InfoIcon from '@material-ui/icons/Info'
 
 import qrCodeIcon from '../../../assets/icons/qr-code.svg'
 import { setLanguage } from '../../../utils/i18n/i18n'
@@ -36,6 +37,13 @@ const Header = () => {
 					</ul>
 				</div>
 				<div className={styles.right}>
+					<button
+						className={styles.qrCodeIcon}
+						type="button"
+						onClick={() => history.push('/info')}
+					>
+						<InfoIcon htmlColor="#060930" fontSize="large" />
+					</button>
 					<button
 						className={styles.qrCodeIcon}
 						type="button"

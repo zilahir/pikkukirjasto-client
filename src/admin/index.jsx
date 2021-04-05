@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import classnames from 'classnames'
 import { useQuery } from 'react-fetching-library'
+import QRCode from 'react-qr-code'
 import apiEndpoints from '../api/apiEndPoints'
 import EditModal from './components/EditModal'
 import AdminContext from './context/adminContext'
@@ -71,6 +72,7 @@ const Admin = () => {
 						<tr>
 							<td>image</td>
 							<td>isbn</td>
+							<td>qrcode</td>
 							<td>actions</td>
 						</tr>
 					</thead>
@@ -89,6 +91,9 @@ const Admin = () => {
 										<img alt="book" src={file.cover} />
 									</td>
 									<td>{file.isbn}</td>
+									<td>
+										<QRCode value={JSON.stringify({ isbn: file.isbn })} />
+									</td>
 									<td className={styles.actionBtnContainer}>
 										<button type="button" onClick={() => selectBook(file)}>
 											EDIT

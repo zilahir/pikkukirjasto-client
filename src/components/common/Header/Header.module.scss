@@ -56,19 +56,23 @@
 	}
 
 	.right {
+		display: flex;
+		align-items: center;
+
 		.qrCodeIcon {
 			border: none;
 			background: none;
 			width: 40px;
 			height: 30px;
 			display: flex;
+			margin: 0 5px;
 
 			&:focus {
 				outline: none;
 			}
 
 			img {
-				max-width: 100%;
+				max-width: 80%;
 			}
 		}
 	}

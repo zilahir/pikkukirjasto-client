@@ -14,6 +14,7 @@ import Insert from './components/screens/Auth/Insert'
 import OnBoad from './components/screens/OnBoard'
 import ReturnScreen from './components/screens/Auth/Return'
 import Search from './components/screens/Auth/Search'
+import Info from './components/screens/Auth/Info'
 
 /**
  *
@@ -34,6 +35,7 @@ function App() {
 				<Route exact path="/new" component={New} />
 				<Route exact path="/search" component={Search} />
 				<Route exact path="/return" component={ReturnScreen} />
+				<Route exact path="/info" component={Info} />
 			</Switch>
 			{!location.pathname.includes('admin') &&
 				!location.pathname.includes('new') &&
