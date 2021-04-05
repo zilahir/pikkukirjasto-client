@@ -28,7 +28,7 @@ const DesktopHome = () => {
 	return (
 		<div>
 			{!loading && (
-				<StackGrid columnWidth={150}>
+				<StackGrid columnWidth={350}>
 					{payload.map(currentBook => (
 						<Book
 							key={currentBook.key}
