@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable unicorn/consistent-function-scoping */
 import React, { useEffect, useState } from 'react'
 import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel'
@@ -7,6 +8,7 @@ import WarningOutlinedIcon from '@material-ui/icons/WarningOutlined'
 
 import axios from 'axios'
 import { useSnackbar } from 'react-simple-snackbar'
+import Loader from 'react-loader-spinner'
 import Book from '../../../common/Book'
 import Header from '../../../common/Header'
 import Layout from '../../../common/Layout'
@@ -101,20 +103,20 @@ const Home = () => {
 								Search
 							</button>
 						</div>
-						<Carousel
-							offset={10}
-							itemWidth={200}
-							plugins={[
-								{
-									resolve: slidesToShowPlugin,
-									options: {
-										numberOfSlides: 3,
+						{!loading && (
+							<Carousel
+								offset={10}
+								itemWidth={200}
+								plugins={[
+									{
+										resolve: slidesToShowPlugin,
+										options: {
+											numberOfSlides: 3,
+										},
 									},
-								},
-							]}
-						>
-							{!loading &&
-								payload.map(currentBook => (
+								]}
+							>
+								{payload.map(currentBook => (
 									<Book
 										onClick={() => handleClick(currentBook)}
 										key={currentBook.key}
@@ -127,7 +129,18 @@ const Home = () => {
 										}}
 									/>
 								))}
-						</Carousel>
+							</Carousel>
+						)}
+						{loading && (
+							<div className={styles.loaderContainer}>
+								<Loader
+									type="TailSpin"
+									color="#060930"
+									height={100}
+									width={100}
+								/>
+							</div>
+						)}
 					</div>
 				</Layout>
 				<Modal
