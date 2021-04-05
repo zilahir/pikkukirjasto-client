@@ -2,6 +2,8 @@
 import { AnimatePresence } from 'framer-motion'
 import React from 'react'
 import { Switch, Route, useLocation } from 'react-router-dom'
+import { isMobile } from 'react-device-detect'
+
 import Admin from './admin'
 import New from './admin/New'
 import BottomBar from './components/common/BottomBar'
@@ -20,6 +22,7 @@ import Search from './components/screens/Auth/Search'
  */
 function App() {
 	const location = useLocation()
+
 	return (
 		<AnimatePresence>
 			<Switch location={location} key={location.pathname}>
@@ -33,7 +36,8 @@ function App() {
 				<Route exact path="/return" component={ReturnScreen} />
 			</Switch>
 			{!location.pathname.includes('admin') &&
-				!location.pathname.includes('new') && <BottomBar />}
+				!location.pathname.includes('new') &&
+				isMobile && <BottomBar />}
 		</AnimatePresence>
 	)
 }
