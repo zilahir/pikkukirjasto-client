@@ -12,6 +12,7 @@ import styles from './Borrow.module.scss'
 import apiEndpoints from '../../../../api/apiEndPoints'
 import Button from '../../../common/Button'
 import cleanIsbn from '../../../../utils/helpers/cleanIsbn'
+import { t } from '../../../../utils/i18n/i18n'
 
 const Borrow = () => {
 	const [isbn, setIsbn] = useState()
@@ -57,11 +58,16 @@ const Borrow = () => {
 					isSuccess ? styles.extend : '',
 				)}
 			>
-				{!isSuccess && <QrReader delay={3000} onScan={handleQrRead} />}
+				{!isSuccess && (
+					<>
+						<h1 className={styles.title}>{t('misc.read-qr')}</h1>
+						<QrReader delay={1000} onScan={handleQrRead} />
+					</>
+				)}
 				{isSuccess && (
 					<div className={styles.successContainer}>
 						<div className={styles.innerContanier}>
-							<p>Thank you for borrowing this book! ❤️</p>
+							<p>{t('screens.borrow.thank-you')}</p>
 							<div className={styles.btnContainer}>
 								<Button label="Go Back" onClick={() => goBack()} />
 							</div>

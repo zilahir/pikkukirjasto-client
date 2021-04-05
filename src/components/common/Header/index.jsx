@@ -1,23 +1,39 @@
-import { format } from 'date-fns'
+/* eslint-disable unicorn/consistent-function-scoping */
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 
 import qrCodeIcon from '../../../assets/icons/qr-code.svg'
+import { setLanguage } from '../../../utils/i18n/i18n'
 import Modal from '../Modal'
 import styles from './Header.module.scss'
 
 const Header = () => {
 	const [isScanModalVisible, toggleScanModalVisible] = useState(false)
 	const history = useHistory()
+
+	/**
+	 * @param chosenLanguage
+	 */
+	function handleLanguageChange(chosenLanguage) {
+		setLanguage(chosenLanguage)
+		window.location.reload(false)
+	}
 	return (
 		<>
 			<div className={styles.headerRoot}>
 				<div className={styles.left}>
-					<p className={styles.day}>{format(new Date(), 'd')}</p>
-					<div className={styles.date}>
-						<p className={styles.dayName}>{format(new Date(), 'eeee')}</p>
-						<p className={styles.dayName}>{format(new Date(), 'LLLL yyyy')}</p>
-					</div>
+					<ul className={styles.languageSelector}>
+						<li>
+							<button type="button" onClick={() => handleLanguageChange('fi')}>
+								🇫🇮
+							</button>
+						</li>
+						<li>
+							<button type="button" onClick={() => handleLanguageChange('en')}>
+								🇬🇧
+							</button>
+						</li>
+					</ul>
 				</div>
 				<div className={styles.right}>
 					<button

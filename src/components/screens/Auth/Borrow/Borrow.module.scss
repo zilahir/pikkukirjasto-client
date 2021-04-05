@@ -7,6 +7,15 @@
 	&.extend {
 		height: 100%;
 	}
+
+	.title {
+		@include heading() {
+			color: $main-background-dark;
+			text-align: center;
+			margin-top: 20px;
+			margin-bottom: 40px;
+		}
+	}
 }
 
 .successContainer {

@@ -10,6 +10,7 @@ import { addBookSchema } from '../../../../utils/schemas/addBookSchema'
 import Button from '../../../common/Button'
 import Camera from '../../../common/Camera'
 import Modal from '../../../common/Modal'
+import { t } from '../../../../utils/i18n/i18n'
 
 const Insert = () => {
 	const [isbn, setIsbn] = useState('')
@@ -64,15 +65,14 @@ const Insert = () => {
 					<div className={styles.header}>
 						<h1 className={styles.title}>Add a new book</h1>
 						<p className={styles.subTitle}>
-							Too add a new book into the library, please follow these few easy
-							steps
+							{t('screens.add-new.instructions')}
 						</p>
 					</div>
 					<div className={styles.addContainer}>
 						<ol>
 							<li>
 								<div>
-									<p>1. Type the ISBN number of the book</p>
+									<p>1. {t('screens.add-new.step-1')}</p>
 								</div>
 								<div className={styles.inputContainer}>
 									<input
@@ -87,22 +87,19 @@ const Insert = () => {
 									/>
 									{errors && errors.isbn && (
 										<p className={styles.error}>
-											Pleae check the ISBN number you entered
+											{t('screens.add-new.step-1-error')}
 										</p>
 									)}
 								</div>
 							</li>
 							<li>
 								<div>
-									<p>
-										2. Create a photo of the front cover of the book, using your
-										phone camera
-									</p>
+									<p>2. {t('screens.add-new.step-2')}</p>
 									<div className={styles.buttonContainer}>
 										<Button
 											onClick={() => uploadPhoto()}
 											disabled={false}
-											label="Upload Photo"
+											label={t('screens.add-new.upload-photo')}
 											variant="secondary"
 										/>
 									</div>
@@ -114,7 +111,7 @@ const Insert = () => {
 						<Button
 							onClick={() => handleAddingNewBook()}
 							disabled={!isEmpty(errors, true) || isbn.length < 10}
-							label="Add new book"
+							label={t('screens.add-new.add-new-book')}
 						/>
 					</div>
 				</div>

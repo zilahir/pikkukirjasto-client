@@ -73,7 +73,7 @@ Modal.propTypes = {
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
 	]).isRequired,
-	height: PropTypes.number,
+	height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	handleClose: PropTypes.func.isRequired,
 	innerContainer: PropTypes.string,
 	isVisible: PropTypes.bool.isRequired,

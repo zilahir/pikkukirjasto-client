@@ -10,29 +10,30 @@ import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn'
 import { AnimateSharedLayout } from 'framer-motion'
 import Tab from './components/Tab'
 import styles from './BottomBar.module.scss'
+import { t } from '../../../utils/i18n/i18n'
 
 const BOTTOM_NAV = [
 	{
 		key: 1,
-		label: 'Home',
+		label: t('tabs.home'),
 		icon: <HomeIcon htmlColor="#ffffff" fontSize="medium" />,
 		path: '/',
 	},
 	{
 		key: 2,
-		label: 'Add new',
 		icon: <HowToVoteIcon htmlColor="#ffffff" fontSize="medium" />,
+		label: t('tabs.add-new'),
 		path: '/add',
 	},
 	{
 		key: 3,
-		label: 'Borrow',
+		label: t('tabs.borrow'),
 		icon: <MenuBookIcon htmlColor="#ffffff" fontSize="medium" />,
 		path: '/borrow',
 	},
 	{
 		key: 4,
-		label: 'Return',
+		label: t('tabs.return'),
 		icon: <KeyboardReturnIcon htmlColor="#ffffff" fontSize="medium" />,
 		path: '/return',
 	},

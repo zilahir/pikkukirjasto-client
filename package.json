@@ -23,6 +23,7 @@
     "framer-motion": "^4.1.2",
     "hex-to-rgba": "^2.0.1",
     "i18next": "^20.1.0",
+    "i18next-browser-languagedetector": "^6.1.0",
     "joi": "^17.4.0",
     "lodash": "^4.17.21",
     "modern-react-qr-reader": "^1.0.12",

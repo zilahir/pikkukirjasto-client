@@ -12,6 +12,16 @@
 			}
 		}
 	}
+
+	&.search {
+		display: flex;
+		align-items: center;
+
+		.meta {
+			margin-left: 30px;
+		}
+	}
+
 	.cover {
 		position: relative;
 		overflow: hidden;

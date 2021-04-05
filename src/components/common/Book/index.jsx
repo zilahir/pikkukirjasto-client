@@ -4,13 +4,17 @@ import classnames from 'classnames'
 
 import styles from './Book.module.scss'
 
-const Book = ({ book, onClick, isBorrowed }) => (
+const Book = ({ book, onClick, isBorrowed, role }) => (
 	<div
 		onKeyDown={undefined}
 		tabIndex={-1}
 		role="button"
 		onClick={onClick}
-		className={classnames(styles.oneBook, isBorrowed ? styles.borrowed : '')}
+		className={classnames(
+			styles.oneBook,
+			isBorrowed ? styles.borrowed : '',
+			role === 'search' ? styles.search : '',
+		)}
 	>
 		<div className={styles.cover}>
 			<img alt={book.title} src={book.cover} />
@@ -26,6 +30,7 @@ const Book = ({ book, onClick, isBorrowed }) => (
 Book.defaultProps = {
 	isBorrowed: false,
 	onClick: () => {},
+	role: 'home',
 }
 
 Book.propTypes = {
@@ -37,6 +42,7 @@ Book.propTypes = {
 	}).isRequired,
 	isBorrowed: PropTypes.bool,
 	onClick: PropTypes.func,
+	role: PropTypes.oneOf(['home', 'search']),
 }
 
 export default Book

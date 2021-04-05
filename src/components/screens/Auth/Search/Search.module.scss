@@ -1,0 +1,36 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins/typography';
+
+.searchContanier {
+	padding: 20px;
+	height: 5vh;
+
+	.searchInput {
+		width: 100%;
+		height: 50px;
+		border: 0;
+		border-bottom: 2px solid $pink-color;
+		transition: all 0.2s ease-in-out;
+		@include paragraph(20px, rgba($main-background-dark, 0.8));
+		padding-left: 10px;
+
+		&:focus {
+			outline: none;
+			background: rgba($color: $pink-color, $alpha: 1);
+			border-radius: 4px;
+		}
+	}
+}
+
+.loaderContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+
+.bookContainer {
+	height: calc(100% - 15vh);
+	overflow: hidden;
+	overflow-y: auto;
+}

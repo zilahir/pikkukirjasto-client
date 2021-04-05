@@ -1,0 +1,34 @@
+{
+	"tabs": {
+		"home": "Home",
+		"add-new": "Add new",
+		"borrow": "Borrow",
+		"return": "Return"
+	},
+	"screens": {
+		"home": {
+			"avaliable-books": "Avaliable books",
+			"search": "Search"
+		},
+		"add-new": {
+			"add-new-book": "Add new book",
+			"instructions": "To add a new book into the library, please follow these few easy steps",
+			"step-1": "Type the ISBN number of the book",
+			"step-1-error": "Pleae check the ISBN number you entered",
+			"step-2": "Create a photo of the front cover of the book, using your phone camera",
+			"upload-photo": "Upoad photo"
+		},
+		"borrow": {
+			"thank-you": "Thank you for borrowing this book! ❤️"
+		},
+		"return": {
+			"thank-you": "Thank you for returning this book! ❤️"
+		},
+		"search": {
+			"search": "Search"
+		}
+	},
+	"misc": {
+		"read-qr": "Read the QR code"
+	}
+}

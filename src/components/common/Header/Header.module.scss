@@ -13,6 +13,26 @@
 		align-items: stretch;
 		flex: 1;
 
+		.languageSelector {
+			list-style-type: none;
+			display: flex;
+			align-items: center;
+
+			li {
+				margin-right: 10px;
+				button {
+					font-size: 40px;
+					background: none;
+					border: none;
+					box-shadow: none;
+
+					&:focus {
+						outline: none;
+					}
+				}
+			}
+		}
+
 		.day {
 			@include heading {
 				font-size: 8vh;

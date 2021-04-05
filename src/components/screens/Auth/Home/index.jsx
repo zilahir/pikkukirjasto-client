@@ -9,6 +9,7 @@ import WarningOutlinedIcon from '@material-ui/icons/WarningOutlined'
 import axios from 'axios'
 import { useSnackbar } from 'react-simple-snackbar'
 import Loader from 'react-loader-spinner'
+import { useHistory } from 'react-router'
 import Book from '../../../common/Book'
 import Header from '../../../common/Header'
 import Layout from '../../../common/Layout'
@@ -19,6 +20,7 @@ import HomeContext from './context/homeContect'
 import apiEndpoints from '../../../../api/apiEndPoints'
 import Button from '../../../common/Button'
 import cleanIsbn from '../../../../utils/helpers/cleanIsbn'
+import { t } from '../../../../utils/i18n/i18n'
 
 const fetchBookList = {
 	method: 'GET',
@@ -27,7 +29,6 @@ const fetchBookList = {
 
 const Home = () => {
 	const { loading, payload } = useQuery(fetchBookList)
-
 	const [isBorrowingModalVisible, toggleBorrowingModal] = useState(false)
 	const [selectedBook, setSelectedBook] = useState()
 	const [borrowHistory, setBorrowHistory] = useState([])
@@ -38,6 +39,7 @@ const Home = () => {
 			height: '5vh',
 		},
 	})
+	const history = useHistory()
 
 	const isBorrowed = isbn =>
 		borrowHistory.some(
@@ -79,7 +81,7 @@ const Home = () => {
 	 *
 	 */
 	function viewAllBooks() {
-		console.debug('search')
+		history.push('/search')
 	}
 
 	return (
@@ -94,13 +96,13 @@ const Home = () => {
 					<Header />
 					<div className={styles.bookContainer}>
 						<div className={styles.header}>
-							<h1>Avaliable books</h1>{' '}
+							<h1>{t('screens.home.avaliable-books')}</h1>{' '}
 							<button
 								type="button"
 								onClick={() => viewAllBooks()}
 								className={styles.viewAll}
 							>
-								Search
+								{t('screens.home.search')}
 							</button>
 						</div>
 						{!loading && (
