@@ -37,10 +37,17 @@ const Search = () => {
 	 * @param givenSearchTerm
 	 */
 	function handleSearch(givenSearchTerm) {
+		let filtered = []
 		setSearchTerm(givenSearchTerm)
-		const filtered = payload.filter(book =>
-			book.title.toLowerCase().includes(givenSearchTerm.toLowerCase()),
-		)
+		if (searchLogic === 'title') {
+			filtered = payload.filter(book =>
+				book.title.toLowerCase().includes(givenSearchTerm.toLowerCase()),
+			)
+		} else if (searchLogic === 'author') {
+			filtered = payload.filter(book =>
+				book.author.toLowerCase().includes(givenSearchTerm.toLowerCase()),
+			)
+		}
 		if (filtered.length > 0) {
 			setFilteredBooks(filtered)
 		}
