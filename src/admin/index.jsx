@@ -1,10 +1,9 @@
 /* eslint-disable unicorn/consistent-function-scoping */
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import classnames from 'classnames'
-import { useQuery } from 'react-fetching-library'
 import QRCode from 'react-qr-code'
+import Loader from 'react-loader-spinner'
 import apiEndpoints from '../api/apiEndPoints'
 import EditModal from './components/EditModal'
 import AdminContext from './context/adminContext'
@@ -12,18 +11,30 @@ import AdminContext from './context/adminContext'
 import styles from './Admin.module.scss'
 import cleanIsbn from '../utils/helpers/cleanIsbn'
 
-const fetchFileList = {
-	method: 'GET',
-	endpoint: apiEndpoints.getAllBooks,
-}
-
 const Admin = () => {
-	const { loading, payload, error, query, reset, abort } = useQuery(
-		fetchFileList,
-	)
+	const [loading, setLoading] = useState(true)
 	const [borrowHistory, setBorrowHistory] = useState([])
 	const [isEditModalOpen, toggleEditModal] = useState(false)
 	const [selectedBook, setSelectedBook] = useState()
+	const [bookList, setBookList] = useState([])
+
+	/**
+	 *
+	 */
+	function getBookList() {
+		setLoading(true)
+		return new Promise(resolve => {
+			axios.get(apiEndpoints.getAllBooks).then(response => {
+				setBookList(response.data)
+				resolve()
+				setLoading(false)
+			})
+		})
+	}
+
+	useEffect(() => {
+		getBookList()
+	}, [])
 
 	const isBorrowed = isbn =>
 		borrowHistory.some(
@@ -51,7 +62,20 @@ const Admin = () => {
 	 * @param toDelete
 	 */
 	function deleteBook(toDelete) {
-		alert('soon')
+		alert('soon', toDelete)
+	}
+
+	/**
+	 * @param toReturn
+	 */
+	function returnBook(toReturn) {
+		axios
+			.patch(apiEndpoints.returnBook, {
+				isbn: cleanIsbn(toReturn.isbn),
+			})
+			.then(() => {
+				getBookList()
+			})
 	}
 	return (
 		<div className={styles.adminRoot}>
@@ -61,7 +85,7 @@ const Admin = () => {
 					setSelectedBook,
 				}}
 			>
-				<h1>tällä hetkellä: {payload ? payload.length : 0}</h1>
+				<h1>tällä hetkellä: {bookList.length}</h1>
 				<h1>tällä hetkellä lainassa: {currentlyBorrowed().length}</h1>
 				<div className={styles.signs}>
 					<p className={styles.in}>in library</p>
@@ -78,7 +102,7 @@ const Admin = () => {
 					</thead>
 					<tbody>
 						{!loading &&
-							payload.map(file => (
+							bookList.map(file => (
 								<tr
 									key={file.isbn}
 									className={classnames(
@@ -95,6 +119,9 @@ const Admin = () => {
 										<QRCode value={JSON.stringify({ isbn: file.isbn })} />
 									</td>
 									<td className={styles.actionBtnContainer}>
+										<button type="button" onClick={() => returnBook(file)}>
+											RETURN BOOK
+										</button>
 										<button type="button" onClick={() => selectBook(file)}>
 											EDIT
 										</button>
@@ -106,6 +133,11 @@ const Admin = () => {
 							))}
 					</tbody>
 				</table>
+				{loading && (
+					<div className={styles.loadingContainer}>
+						<Loader type="TailSpin" color="#060930" height={100} width={100} />
+					</div>
+				)}
 				<EditModal
 					isVisible={isEditModalOpen}
 					handleClose={() => toggleEditModal(false)}
