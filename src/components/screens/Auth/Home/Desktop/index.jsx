@@ -1,8 +1,10 @@
 import axios from 'axios'
 import hexToRgba from 'hex-to-rgba'
 import React, { useEffect, useState } from 'react'
-import { useQuery } from 'react-fetching-library'
+import Loader from 'react-loader-spinner'
 import StackGrid from 'react-stack-grid'
+import { orderBy } from 'lodash'
+
 import apiEndpoints from '../../../../../api/apiEndPoints'
 import cleanIsbn from '../../../../../utils/helpers/cleanIsbn'
 import searchBooks from '../../../../../utils/helpers/seach'
@@ -11,17 +13,11 @@ import Book from '../../../../common/Book'
 import Search from '../../../../common/Search'
 import styles from './Desktop.module.scss'
 
-const fetchBookList = {
-	method: 'GET',
-	endpoint: apiEndpoints.getAllBooks,
-}
-
 const DesktopHome = () => {
-	const { loading, payload } = useQuery(fetchBookList)
 	const [borrowHistory, setBorrowHistory] = useState([])
-	const [serachTerm, setSearchTerm] = useState('')
 	const [filteredBooks, setFilteredBooks] = useState([])
 	const [searchLogic, setSearchLogic] = useState('title')
+	const [isLoading, toggleLoading] = useState(true)
 
 	const isBorrowed = isbn =>
 		borrowHistory.some(
@@ -29,17 +25,43 @@ const DesktopHome = () => {
 		)
 
 	useEffect(() => {
-		axios.get(apiEndpoints.getBorrowHistory).then(result => {
-			setBorrowHistory(result.data)
-		})
+		const history = axios.get(apiEndpoints.getBorrowHistory)
+		const allBooks = axios.get(apiEndpoints.getAllBooks)
+		Promise.all([history, allBooks])
+			.then(results => {
+				setBorrowHistory(results[0].data)
+				setFilteredBooks(results[1].data)
+			})
+			.finally(() => {
+				toggleLoading(false)
+			})
 	}, [])
 
 	/**
 	 * @param providedSearchTerm
 	 */
 	function handleBookSearch(providedSearchTerm) {
-		setSearchTerm(providedSearchTerm)
-		setFilteredBooks(searchBooks(providedSearchTerm, payload, searchLogic))
+		setFilteredBooks(
+			searchBooks(providedSearchTerm, filteredBooks, searchLogic),
+		)
+	}
+
+	/**
+	 * @param chosenSort
+	 */
+	// eslint-disable-next-line unicorn/consistent-function-scoping
+	function handleSort(chosenSort) {
+		toggleLoading(true)
+		if (chosenSort === 'abc') {
+			const ordered = orderBy(
+				filteredBooks,
+				[book => book.title.toLowerCase()],
+				['asc'],
+			)
+			console.debug(ordered)
+			setFilteredBooks(ordered)
+			toggleLoading(false)
+		}
 	}
 	return (
 		<div>
@@ -64,37 +86,37 @@ const DesktopHome = () => {
 					/>
 				</div>
 			</div>
-			{!loading && serachTerm.length === 0 && (
-				<StackGrid columnWidth={350} monitorImagesLoaded>
-					{payload.map(currentBook => (
-						<Book
-							key={currentBook.isbn}
-							isBorrowed={isBorrowed(cleanIsbn(currentBook.isbn))}
-							book={{
-								title: currentBook.title,
-								author: currentBook.author,
-								isbn: cleanIsbn(currentBook.isbn),
-								cover: currentBook.cover,
-							}}
-						/>
-					))}
-				</StackGrid>
+			{filteredBooks.length > 0 && !isLoading && (
+				<>
+					<div className={styles.sortContainer}>
+						<button
+							type="button"
+							className={styles.sortBtn}
+							onClick={() => handleSort('abc')}
+						>
+							A-Z
+						</button>
+					</div>
+					<StackGrid columnWidth={350} monitorImagesLoaded>
+						{filteredBooks.map(currentBook => (
+							<Book
+								key={currentBook.isbn}
+								isBorrowed={isBorrowed(cleanIsbn(currentBook.isbn))}
+								book={{
+									title: currentBook.title,
+									author: currentBook.author,
+									isbn: cleanIsbn(currentBook.isbn),
+									cover: currentBook.cover,
+								}}
+							/>
+						))}
+					</StackGrid>
+				</>
 			)}
-			{serachTerm.length > 0 && filteredBooks.length > 0 && (
-				<StackGrid columnWidth={350} monitorImagesLoaded>
-					{filteredBooks.map(currentBook => (
-						<Book
-							key={currentBook.isbn}
-							isBorrowed={isBorrowed(cleanIsbn(currentBook.isbn))}
-							book={{
-								title: currentBook.title,
-								author: currentBook.author,
-								isbn: cleanIsbn(currentBook.isbn),
-								cover: currentBook.cover,
-							}}
-						/>
-					))}
-				</StackGrid>
+			{isLoading && (
+				<div className={styles.loaderContainer}>
+					<Loader type="TailSpin" color="#060930" height={100} width={100} />
+				</div>
 			)}
 		</div>
 	)

@@ -44,3 +44,32 @@
 		}
 	}
 }
+
+.loaderContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: calc(100vh - 100px);
+}
+
+.sortContainer {
+	height: 50px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	.sortBtn {
+		@include paragraph(16px, #ffffff);
+		background: none;
+		border: none;
+		padding: 10px 8px;
+		background: rgba($color: $main-background-dark, $alpha: 1);
+		border-radius: 5px;
+
+		&:focus {
+			outline: none;
+		}
+	}
+}
