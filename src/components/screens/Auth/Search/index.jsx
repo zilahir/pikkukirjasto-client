@@ -4,24 +4,20 @@ import classnames from 'classnames'
 import { useQuery } from 'react-fetching-library'
 import Loader from 'react-loader-spinner'
 import { AnimateSharedLayout, motion } from 'framer-motion'
+
+import SearchComponent from '../../../common/Search'
 import apiEndpoints from '../../../../api/apiEndPoints'
 import cleanIsbn from '../../../../utils/helpers/cleanIsbn'
 import { t } from '../../../../utils/i18n/i18n'
 import Book from '../../../common/Book'
 import Button from '../../../common/Button'
 import Layout from '../../../common/Layout'
-
 import styles from './Search.module.scss'
+import searchBooks from '../../../../utils/helpers/seach'
 
 const fetchBookList = {
 	method: 'GET',
 	endpoint: apiEndpoints.getAllBooks,
-}
-
-const spring = {
-	type: 'spring',
-	stiffness: 500,
-	damping: 30,
 }
 
 const Search = () => {
@@ -37,20 +33,8 @@ const Search = () => {
 	 * @param givenSearchTerm
 	 */
 	function handleSearch(givenSearchTerm) {
-		let filtered = []
 		setSearchTerm(givenSearchTerm)
-		if (searchLogic === 'title') {
-			filtered = payload.filter(book =>
-				book.title.toLowerCase().includes(givenSearchTerm.toLowerCase()),
-			)
-		} else if (searchLogic === 'author') {
-			filtered = payload.filter(book =>
-				book.author.toLowerCase().includes(givenSearchTerm.toLowerCase()),
-			)
-		}
-		if (filtered.length > 0) {
-			setFilteredBooks(filtered)
-		}
+		setFilteredBooks(searchBooks(givenSearchTerm, payload, searchLogic))
 	}
 	return (
 		<Layout>
@@ -61,50 +45,10 @@ const Search = () => {
 					className={styles.searchInput}
 					placeholder={t('screens.search.search')}
 				/>
-				<div className={styles.searchLogicContainer}>
-					<AnimateSharedLayout>
-						<div className={styles.logicBtnContainer}>
-							<button
-								className={classnames(
-									styles.logicBtn,
-									searchLogic === 'title' ? styles.active : '',
-								)}
-								type="button"
-								onClick={() => setSearchLogic('title')}
-							>
-								Title
-								{searchLogic === 'title' && (
-									<motion.div
-										layoutId="searchLogic"
-										initial={false}
-										animate={{ backgroundColor: '#060930' }}
-										transition={spring}
-									/>
-								)}
-							</button>
-						</div>
-						<div className={styles.logicBtnContainer}>
-							<button
-								className={classnames(
-									styles.logicBtn,
-									searchLogic === 'author' ? styles.active : '',
-								)}
-								type="button"
-								onClick={() => setSearchLogic('author')}
-							>
-								Author
-								{searchLogic === 'author' && (
-									<motion.div
-										initial={false}
-										animate={{ backgroundColor: '#060930' }}
-										transition={spring}
-										layoutId="searchLogic"
-									/>
-								)}
-							</button>
-						</div>
-					</AnimateSharedLayout>
-				</div>
+				<SearchComponent
+					setSearchLogic={setSearchLogic}
+					searchLogic={searchLogic}
+				/>
 			</div>
 			{!isCurrentlyLoading && searchTerm.length === 0 && (
 				<div className={styles.bookContainer}>

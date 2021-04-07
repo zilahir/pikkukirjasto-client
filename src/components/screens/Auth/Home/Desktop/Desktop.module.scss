@@ -1,0 +1,28 @@
+@import '../../../../../styles/variables';
+@import '../../../../../styles/mixins/typography';
+
+.searchContainer {
+	background: rgba($color: $main-background-dark, $alpha: 1);
+	padding: 30px 60px;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+
+	input {
+		@include paragraph(20px, #ffffff);
+		padding-left: 10px;
+		height: 40px;
+		width: 300px;
+		border: none;
+		background: rgba($color: #000000, $alpha: 0.35);
+		border-radius: 5px;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+		border: 2px solid transparent;
+
+		&:focus {
+			outline: none;
+			border: 2px solid rgba($color: #ffffff, $alpha: 0.35);
+		}
+	}
+}
