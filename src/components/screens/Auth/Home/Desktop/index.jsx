@@ -16,6 +16,7 @@ import styles from './Desktop.module.scss'
 const DesktopHome = () => {
 	const [borrowHistory, setBorrowHistory] = useState([])
 	const [filteredBooks, setFilteredBooks] = useState([])
+	const [orignalBookList, setAllBooks] = useState([])
 	const [totelSumOfBooks, setTotalSumOfBooks] = useState(0)
 	const [searchLogic, setSearchLogic] = useState('title')
 	const [isLoading, toggleLoading] = useState(true)
@@ -32,6 +33,7 @@ const DesktopHome = () => {
 			.then(results => {
 				setBorrowHistory(results[0].data)
 				setFilteredBooks(results[1].data)
+				setAllBooks(results[1].data)
 				setTotalSumOfBooks(results[1].data.length)
 			})
 			.finally(() => {
@@ -44,7 +46,7 @@ const DesktopHome = () => {
 	 */
 	function handleBookSearch(providedSearchTerm) {
 		setFilteredBooks(
-			searchBooks(providedSearchTerm, filteredBooks, searchLogic),
+			searchBooks(providedSearchTerm, orignalBookList, searchLogic),
 		)
 	}
 
@@ -60,7 +62,7 @@ const DesktopHome = () => {
 				[book => book.title.toLowerCase()],
 				['asc'],
 			)
-			console.debug(ordered)
+
 			setFilteredBooks(ordered)
 			toggleLoading(false)
 		}
