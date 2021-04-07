@@ -16,6 +16,13 @@
 			@include heading() {
 				font-size: 30px;
 				color: #ffffff;
+				display: flex;
+				align-items: center;
+
+				span {
+					@include paragraph(20px, $pink-color);
+					margin: 0 8px;
+				}
 			}
 		}
 	}

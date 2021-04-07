@@ -16,6 +16,7 @@ import styles from './Desktop.module.scss'
 const DesktopHome = () => {
 	const [borrowHistory, setBorrowHistory] = useState([])
 	const [filteredBooks, setFilteredBooks] = useState([])
+	const [totelSumOfBooks, setTotalSumOfBooks] = useState(0)
 	const [searchLogic, setSearchLogic] = useState('title')
 	const [isLoading, toggleLoading] = useState(true)
 
@@ -31,6 +32,7 @@ const DesktopHome = () => {
 			.then(results => {
 				setBorrowHistory(results[0].data)
 				setFilteredBooks(results[1].data)
+				setTotalSumOfBooks(results[1].data.length)
 			})
 			.finally(() => {
 				toggleLoading(false)
@@ -67,7 +69,9 @@ const DesktopHome = () => {
 		<div>
 			<div className={styles.searchContainer}>
 				<div className={styles.left}>
-					<h1>📖 Halkeinkiven Pikkukirjasto</h1>
+					<h1>
+						📖 Halkeinkiven Pikkukirjasto <span>({totelSumOfBooks})</span>
+					</h1>
 				</div>
 				<div className={styles.center}>
 					<input
