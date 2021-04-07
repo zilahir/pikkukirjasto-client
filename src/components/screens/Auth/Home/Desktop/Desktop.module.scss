@@ -8,6 +8,24 @@
 	align-items: center;
 	display: flex;
 
+	.left {
+		display: flex;
+		align-items: center;
+
+		h1 {
+			@include heading() {
+				font-size: 30px;
+				color: #ffffff;
+			}
+		}
+	}
+
+	.center {
+		display: flex;
+		flex: 1;
+		justify-content: center;
+	}
+
 	input {
 		@include paragraph(20px, #ffffff);
 		padding-left: 10px;

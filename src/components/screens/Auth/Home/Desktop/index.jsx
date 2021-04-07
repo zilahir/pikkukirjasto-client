@@ -44,20 +44,25 @@ const DesktopHome = () => {
 	return (
 		<div>
 			<div className={styles.searchContainer}>
-				<input
-					type="text"
-					onChange={event => handleBookSearch(event.target.value)}
-					placeholder={t('screens.search.search')}
-				/>
-				<Search
-					fontColors={{
-						active: '#ffffff',
-						inActive: '#f4abc4',
-					}}
-					activebgColor={hexToRgba('#f4abc4', 1)}
-					searchLogic={searchLogic}
-					setSearchLogic={setSearchLogic}
-				/>
+				<div className={styles.left}>
+					<h1>📖 Halkeinkiven Pikkukirjasto</h1>
+				</div>
+				<div className={styles.center}>
+					<input
+						type="text"
+						onChange={event => handleBookSearch(event.target.value)}
+						placeholder={t('screens.search.search')}
+					/>
+					<Search
+						fontColors={{
+							active: '#ffffff',
+							inActive: '#f4abc4',
+						}}
+						activebgColor={hexToRgba('#f4abc4', 1)}
+						searchLogic={searchLogic}
+						setSearchLogic={setSearchLogic}
+					/>
+				</div>
 			</div>
 			{!loading && serachTerm.length === 0 && (
 				<StackGrid columnWidth={350} monitorImagesLoaded>
