@@ -17,7 +17,7 @@ function searchBooks(givenSearchTerm, books, searchLogic) {
 		)
 	} else if (searchLogic === 'isbn') {
 		filtered = books.filter(book =>
-			cleanIsbn(book.isbn).includes(givenSearchTerm),
+			cleanIsbn(book.isbn).includes(cleanIsbn(givenSearchTerm)),
 		)
 	}
 	return filtered
