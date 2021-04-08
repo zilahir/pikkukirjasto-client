@@ -1,3 +1,5 @@
+import cleanIsbn from './cleanIsbn'
+
 /**
  * @param givenSearchTerm
  * @param books
@@ -12,6 +14,10 @@ function searchBooks(givenSearchTerm, books, searchLogic) {
 	} else if (searchLogic === 'author') {
 		filtered = books.filter(book =>
 			book.author.toLowerCase().includes(givenSearchTerm.toLowerCase()),
+		)
+	} else if (searchLogic === 'isbn') {
+		filtered = books.filter(book =>
+			cleanIsbn(book.isbn).includes(givenSearchTerm),
 		)
 	}
 	return filtered
