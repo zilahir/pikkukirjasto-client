@@ -81,3 +81,34 @@ $out: red;
 	width: 100%;
 	margin: 40px 0;
 }
+
+.header {
+	height: 70px;
+	background: #ccc;
+	display: flex;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 9;
+
+	.info {
+		display: flex;
+		flex: 1;
+	}
+
+	.search {
+		margin-right: 50px;
+
+		button {
+			border: none;
+			background: none;
+		}
+	}
+
+	h1 {
+		span {
+			margin: 0 10px;
+		}
+	}
+}

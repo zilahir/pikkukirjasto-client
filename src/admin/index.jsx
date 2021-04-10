@@ -6,6 +6,7 @@ import QRCode from 'react-qr-code'
 import Loader from 'react-loader-spinner'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSnackbar } from 'react-simple-snackbar'
+import SearchIcon from '@material-ui/icons/Search'
 
 import apiEndpoints from '../api/apiEndPoints'
 import EditModal from './components/EditModal'
@@ -76,6 +77,13 @@ const Admin = () => {
 	}
 
 	/**
+	 *
+	 */
+	function handlelSearch() {
+		console.debug('pressed')
+	}
+
+	/**
 	 * @param toReturn
 	 */
 	function returnBook(toReturn) {
@@ -88,15 +96,26 @@ const Admin = () => {
 			})
 	}
 	return (
-		<div className={styles.adminRoot}>
-			<AdminContext.Provider
-				value={{
-					selectedBook,
-					setSelectedBook,
-				}}
-			>
-				<h1>tällä hetkellä: {allBooks.length}</h1>
-				<h1>tällä hetkellä lainassa: {currentlyBorrowed().length}</h1>
+		<AdminContext.Provider
+			value={{
+				selectedBook,
+				setSelectedBook,
+			}}
+		>
+			<header className={styles.header}>
+				<div className={styles.info}>
+					<h1>
+						<span>tällä hetkellä: {allBooks.length}</span>
+						<span>tällä hetkellä lainassa: {currentlyBorrowed().length}</span>
+					</h1>
+				</div>
+				<div className={styles.search}>
+					<button onClick={() => handlelSearch()} type="button">
+						<SearchIcon fontSize="large" />
+					</button>
+				</div>
+			</header>
+			<div className={styles.adminRoot}>
 				<div className={styles.signs}>
 					<p className={styles.in}>in library</p>
 					<p className={styles.out}>borrowed</p>
@@ -156,8 +175,8 @@ const Admin = () => {
 					isVisible={isEditModalOpen}
 					handleClose={() => toggleEditModal(false)}
 				/>
-			</AdminContext.Provider>
-		</div>
+			</div>
+		</AdminContext.Provider>
 	)
 }
 
