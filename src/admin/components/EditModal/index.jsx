@@ -23,6 +23,7 @@ const EditModal = ({ isVisible, handleClose }) => {
 	const [bookCover, setBookCover] = useState(false)
 	const [isSaved, setIsSaved] = useState(false)
 	const [openSnackbar, closeSnackbar] = useSnackbar()
+	const [isModified, toggleModified] = useState(false)
 
 	useEffect(() => {
 		if (selectedBook) {
@@ -88,6 +89,7 @@ const EditModal = ({ isVisible, handleClose }) => {
 		}
 		axios.patch(`${apiEndpoints.modifyBook}/${isbn}`, modifyObject).then(() => {
 			openSnackbar(`${title} book is successfully modified!`)
+			toggleModified(true)
 		})
 	}
 
@@ -99,6 +101,13 @@ const EditModal = ({ isVisible, handleClose }) => {
 			document.querySelector('#qrContainer svg'),
 			`qr-${slugify(title)}`,
 		)
+	}
+
+	/**
+	 *
+	 */
+	function closeAndRefresh() {
+		handleClose()
 	}
 
 	return (
@@ -168,6 +177,11 @@ const EditModal = ({ isVisible, handleClose }) => {
 							{isSaved && (
 								<button type="button" onClick={() => reset()}>
 									add new book
+								</button>
+							)}
+							{isModified && (
+								<button type="button" onClick={() => closeAndRefresh()}>
+									close and refresh
 								</button>
 							)}
 						</div>

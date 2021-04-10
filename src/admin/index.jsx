@@ -4,19 +4,22 @@ import axios from 'axios'
 import classnames from 'classnames'
 import QRCode from 'react-qr-code'
 import Loader from 'react-loader-spinner'
+import { useDispatch, useSelector } from 'react-redux'
+
 import apiEndpoints from '../api/apiEndPoints'
 import EditModal from './components/EditModal'
 import AdminContext from './context/adminContext'
-
 import styles from './Admin.module.scss'
 import cleanIsbn from '../utils/helpers/cleanIsbn'
+import { setAllBooks } from '../store/actions/books'
 
 const Admin = () => {
 	const [loading, setLoading] = useState(true)
 	const [borrowHistory, setBorrowHistory] = useState([])
 	const [isEditModalOpen, toggleEditModal] = useState(false)
 	const [selectedBook, setSelectedBook] = useState()
-	const [bookList, setBookList] = useState([])
+	const dispatch = useDispatch(9)
+	const { allBooks } = useSelector(store => store.books)
 
 	/**
 	 *
@@ -25,7 +28,7 @@ const Admin = () => {
 		setLoading(true)
 		return new Promise(resolve => {
 			axios.get(apiEndpoints.getAllBooks).then(response => {
-				setBookList(response.data)
+				dispatch(setAllBooks(response.data))
 				resolve()
 				setLoading(false)
 			})
@@ -85,7 +88,7 @@ const Admin = () => {
 					setSelectedBook,
 				}}
 			>
-				<h1>tällä hetkellä: {bookList.length}</h1>
+				<h1>tällä hetkellä: {allBooks.length}</h1>
 				<h1>tällä hetkellä lainassa: {currentlyBorrowed().length}</h1>
 				<div className={styles.signs}>
 					<p className={styles.in}>in library</p>
@@ -102,7 +105,7 @@ const Admin = () => {
 					</thead>
 					<tbody>
 						{!loading &&
-							bookList.map(file => (
+							allBooks.map(file => (
 								<tr
 									key={file.isbn}
 									className={classnames(
