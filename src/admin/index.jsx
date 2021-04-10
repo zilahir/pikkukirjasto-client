@@ -5,13 +5,14 @@ import classnames from 'classnames'
 import QRCode from 'react-qr-code'
 import Loader from 'react-loader-spinner'
 import { useDispatch, useSelector } from 'react-redux'
+import { useSnackbar } from 'react-simple-snackbar'
 
 import apiEndpoints from '../api/apiEndPoints'
 import EditModal from './components/EditModal'
 import AdminContext from './context/adminContext'
 import styles from './Admin.module.scss'
 import cleanIsbn from '../utils/helpers/cleanIsbn'
-import { setAllBooks } from '../store/actions/books'
+import { removeBook, setAllBooks } from '../store/actions/books'
 
 const Admin = () => {
 	const [loading, setLoading] = useState(true)
@@ -20,6 +21,7 @@ const Admin = () => {
 	const [selectedBook, setSelectedBook] = useState()
 	const dispatch = useDispatch(9)
 	const { allBooks } = useSelector(store => store.books)
+	const [openSnackbar] = useSnackbar()
 
 	/**
 	 *
@@ -63,9 +65,14 @@ const Admin = () => {
 
 	/**
 	 * @param toDelete
+	 * @param isbnToDelete
+	 * @param book
 	 */
-	function deleteBook(toDelete) {
-		alert('soon', toDelete)
+	function deleteBook(book) {
+		axios.delete(`${apiEndpoints.deleteBook}/${book.isbn}`).then(() => {
+			openSnackbar(`book: ${book.title} had been deleted!`)
+			dispatch(removeBook(book.isbn))
+		})
 	}
 
 	/**
@@ -98,7 +105,7 @@ const Admin = () => {
 					<thead>
 						<tr>
 							<td>image</td>
-							<td>isbn</td>
+							<td>info</td>
 							<td>qrcode</td>
 							<td>actions</td>
 						</tr>
@@ -117,7 +124,11 @@ const Admin = () => {
 									<td>
 										<img alt="book" src={file.cover} />
 									</td>
-									<td>{file.isbn}</td>
+									<td>
+										<p>{file.isbn}</p>
+										<p>{file.author}</p>
+										<p>{file.title}</p>
+									</td>
 									<td>
 										<QRCode value={JSON.stringify({ isbn: file.isbn })} />
 									</td>

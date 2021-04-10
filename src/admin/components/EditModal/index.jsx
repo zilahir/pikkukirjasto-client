@@ -22,7 +22,7 @@ const EditModal = ({ isVisible, handleClose }) => {
 	const [isbn, setIsbn] = useState(false)
 	const [bookCover, setBookCover] = useState(false)
 	const [isSaved, setIsSaved] = useState(false)
-	const [openSnackbar, closeSnackbar] = useSnackbar()
+	const [openSnackbar] = useSnackbar()
 	const [isModified, toggleModified] = useState(false)
 
 	useEffect(() => {
