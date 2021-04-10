@@ -11,6 +11,7 @@ const apiEndpoints = {
 	getBorrowHistory: `${apiRoot}/borrow/all`,
 	createNewBorrow: `${apiRoot}/borrow/new`,
 	returnBook: `${apiRoot}/borrow/return`,
+	modifyBook: `${apiRoot}/book`,
 }
 
 export default apiEndpoints
