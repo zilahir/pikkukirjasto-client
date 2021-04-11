@@ -42,7 +42,10 @@ const DesktopHome = () => {
 	}, [])
 
 	/**
-	 * @param providedSearchTerm
+	 * @param {string} providedSearchTerm the search term typed into the input
+	 * @description filters the book by the provided searchterm
+	 * and sets the result into the array
+	 * that contains the filtered books
 	 */
 	function handleBookSearch(providedSearchTerm) {
 		setFilteredBooks(
@@ -51,9 +54,10 @@ const DesktopHome = () => {
 	}
 
 	/**
-	 * @param chosenSort
+	 * @param {string} chosenSort string representation of the cliicked sorting logic
+	 * @description sorts the array of book by the provided sorthing methid in the argument
+	 * and sets the fitlered book array with the result
 	 */
-	// eslint-disable-next-line unicorn/consistent-function-scoping
 	function handleSort(chosenSort) {
 		toggleLoading(true)
 		if (chosenSort === 'abc') {

@@ -21,7 +21,12 @@ const Borrow = () => {
 	const history = useHistory()
 
 	/**
-	 * @param data
+	 * @param {string} data stringied json of he data
+	 * that contains the ISBn code of the book
+	 * on a QR code
+	 * @description parses the (mal)formatted json
+	 * and calls the API, that will set to book as borrowed
+	 * in the database
 	 */
 	function handleQrRead(data) {
 		if (data) {
@@ -44,7 +49,7 @@ const Borrow = () => {
 	}
 
 	/**
-	 *
+	 * @description goes back in the browser's history
 	 */
 	function goBack() {
 		toggleSuccess(false)

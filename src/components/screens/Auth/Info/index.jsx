@@ -1,5 +1,3 @@
-/* eslint-disable global-require */
-/* eslint-disable no-underscore-dangle */
 import React from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'

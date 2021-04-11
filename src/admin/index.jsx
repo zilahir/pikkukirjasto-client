@@ -4,19 +4,25 @@ import axios from 'axios'
 import classnames from 'classnames'
 import QRCode from 'react-qr-code'
 import Loader from 'react-loader-spinner'
+import { useDispatch, useSelector } from 'react-redux'
+import { useSnackbar } from 'react-simple-snackbar'
+import SearchIcon from '@material-ui/icons/Search'
+
 import apiEndpoints from '../api/apiEndPoints'
 import EditModal from './components/EditModal'
 import AdminContext from './context/adminContext'
-
 import styles from './Admin.module.scss'
 import cleanIsbn from '../utils/helpers/cleanIsbn'
+import { removeBook, setAllBooks } from '../store/actions/books'
 
 const Admin = () => {
 	const [loading, setLoading] = useState(true)
 	const [borrowHistory, setBorrowHistory] = useState([])
 	const [isEditModalOpen, toggleEditModal] = useState(false)
 	const [selectedBook, setSelectedBook] = useState()
-	const [bookList, setBookList] = useState([])
+	const dispatch = useDispatch(9)
+	const { allBooks } = useSelector(store => store.books)
+	const [openSnackbar] = useSnackbar()
 
 	/**
 	 *
@@ -25,7 +31,7 @@ const Admin = () => {
 		setLoading(true)
 		return new Promise(resolve => {
 			axios.get(apiEndpoints.getAllBooks).then(response => {
-				setBookList(response.data)
+				dispatch(setAllBooks(response.data))
 				resolve()
 				setLoading(false)
 			})
@@ -42,7 +48,9 @@ const Admin = () => {
 		)
 
 	/**
-	 * @param book
+	 * @param {object} book the object representation of a book
+	 * @description toogles the edit modal, and
+	 * set the selected book into the context API
 	 */
 	function selectBook(book) {
 		toggleEditModal(true)
@@ -59,34 +67,59 @@ const Admin = () => {
 		borrowHistory.filter(borrow => borrow.isBorrowed)
 
 	/**
-	 * @param toDelete
+	 * @param {object} book the object representation of a book
+	 * @description cals the DELETE api, to delete a specifc book
+	 * providied in the paramenters
 	 */
-	function deleteBook(toDelete) {
-		alert('soon', toDelete)
+	function deleteBook(book) {
+		axios.delete(`${apiEndpoints.deleteBook}/${book.isbn}`).then(() => {
+			openSnackbar(`book: ${book.title} had been deleted!`)
+			dispatch(removeBook(book.isbn))
+		})
 	}
 
 	/**
-	 * @param toReturn
+	 *
 	 */
-	function returnBook(toReturn) {
+	function handlelSearch() {
+		console.debug('pressed')
+	}
+
+	/**
+	 * @param {object} book the object representation of a book
+	 * @description calls the return APi with the book provided
+	 * in the arguments
+	 */
+	function returnBook(book) {
 		axios
 			.patch(apiEndpoints.returnBook, {
-				isbn: cleanIsbn(toReturn.isbn),
+				isbn: cleanIsbn(book.isbn),
 			})
 			.then(() => {
 				getBookList()
 			})
 	}
 	return (
-		<div className={styles.adminRoot}>
-			<AdminContext.Provider
-				value={{
-					selectedBook,
-					setSelectedBook,
-				}}
-			>
-				<h1>tällä hetkellä: {bookList.length}</h1>
-				<h1>tällä hetkellä lainassa: {currentlyBorrowed().length}</h1>
+		<AdminContext.Provider
+			value={{
+				selectedBook,
+				setSelectedBook,
+			}}
+		>
+			<header className={styles.header}>
+				<div className={styles.info}>
+					<h1>
+						<span>tällä hetkellä: {allBooks.length}</span>
+						<span>tällä hetkellä lainassa: {currentlyBorrowed().length}</span>
+					</h1>
+				</div>
+				<div className={styles.search}>
+					<button onClick={() => handlelSearch()} type="button">
+						<SearchIcon fontSize="large" />
+					</button>
+				</div>
+			</header>
+			<div className={styles.adminRoot}>
 				<div className={styles.signs}>
 					<p className={styles.in}>in library</p>
 					<p className={styles.out}>borrowed</p>
@@ -95,14 +128,14 @@ const Admin = () => {
 					<thead>
 						<tr>
 							<td>image</td>
-							<td>isbn</td>
+							<td>info</td>
 							<td>qrcode</td>
 							<td>actions</td>
 						</tr>
 					</thead>
 					<tbody>
 						{!loading &&
-							bookList.map(file => (
+							allBooks.map(file => (
 								<tr
 									key={file.isbn}
 									className={classnames(
@@ -114,7 +147,11 @@ const Admin = () => {
 									<td>
 										<img alt="book" src={file.cover} />
 									</td>
-									<td>{file.isbn}</td>
+									<td>
+										<p>{file.isbn}</p>
+										<p>{file.author}</p>
+										<p>{file.title}</p>
+									</td>
 									<td>
 										<QRCode value={JSON.stringify({ isbn: file.isbn })} />
 									</td>
@@ -142,8 +179,8 @@ const Admin = () => {
 					isVisible={isEditModalOpen}
 					handleClose={() => toggleEditModal(false)}
 				/>
-			</AdminContext.Provider>
-		</div>
+			</div>
+		</AdminContext.Provider>
 	)
 }
 
