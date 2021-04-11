@@ -8,24 +8,28 @@ import shortid from 'shortid'
 import apiEndpoints from '../../../api/apiEndPoints'
 
 const UploadFile = ({ getBackUrl }) => {
-	const onDrop = useCallback(acceptedFiles => {
-		const image = acceptedFiles[0]
-		const formData = new FormData()
-		const file = new File([image], `${shortid.generate()}.jpg`, {
-			type: 'image/jpeg',
-		})
-		formData.append('image', file)
-		axios
-			.post(apiEndpoints.uploadImage, formData, {
-				headers: {
-					Accept: 'multipart/form-data',
-					'content-type': 'multipart/form-data',
-				},
+	const onDrop = useCallback(
+		acceptedFiles => {
+			const image = acceptedFiles[0]
+			const formData = new FormData()
+			const file = new File([image], `${shortid.generate()}.jpg`, {
+				type: 'image/jpeg',
 			})
-			.then(result => {
-				getBackUrl(result.data)
-			})
-	}, [])
+			formData.append('image', file)
+			axios
+				.post(apiEndpoints.uploadImage, formData, {
+					headers: {
+						Accept: 'multipart/form-data',
+						'content-type': 'multipart/form-data',
+					},
+				})
+				.then(result => {
+					getBackUrl(result.data)
+				})
+		},
+		[getBackUrl],
+	)
+
 	const { getRootProps, getInputProps, open } = useDropzone({
 		onDrop,
 		noClick: true,

@@ -13,7 +13,8 @@ const Header = () => {
 	const history = useHistory()
 
 	/**
-	 * @param chosenLanguage
+	 * @param {string} chosenLanguage string representation of the chosen language
+	 * @description sets the clicked language
 	 */
 	function handleLanguageChange(chosenLanguage) {
 		setLanguage(chosenLanguage)

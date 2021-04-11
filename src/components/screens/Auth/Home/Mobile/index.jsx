@@ -47,7 +47,8 @@ const MobileHome = () => {
 		)
 
 	/**
-	 * @param chosenBook
+	 * @param {object} chosenBook the object representatino of the book
+	 * sets the book provided in the parameter into the context APi
 	 */
 	function handleClick(chosenBook) {
 		const isCurrentlyBorrowed = isBorrowed(chosenBook.isbn)
@@ -64,7 +65,8 @@ const MobileHome = () => {
 	}, [])
 
 	/**
-	 *
+	 * @description cals the borrow API and set's the book
+	 * from the context APi to borrowed
 	 */
 	function handleBorrow() {
 		axios
@@ -78,7 +80,7 @@ const MobileHome = () => {
 	}
 
 	/**
-	 *
+	 * @description navigates to the /seatch screen
 	 */
 	function viewAllBooks() {
 		history.push('/search')

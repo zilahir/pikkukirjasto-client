@@ -49,13 +49,13 @@ const Modal = ({
 			</AnimatePresence>
 			{isVisible &&
 				ReactDOM.createPortal(
-					// eslint-disable-next-line jsx-a11y/control-has-associated-label
 					<div
 						className={styles.overlay}
 						onKeyDown={undefined}
 						tabIndex={-1}
 						onClick={handleClose}
 						role="button"
+						aria-label="close"
 					/>,
 					document.querySelector('#root'),
 				)}

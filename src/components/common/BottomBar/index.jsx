@@ -5,8 +5,6 @@ import HowToVoteIcon from '@material-ui/icons/HowToVote'
 import MenuBookIcon from '@material-ui/icons/MenuBook'
 import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn'
 
-// import UploadFile from '../UploadFile'
-
 import { AnimateSharedLayout } from 'framer-motion'
 import Tab from './components/Tab'
 import styles from './BottomBar.module.scss'
@@ -44,7 +42,8 @@ const BottomBar = () => {
 	const [isActive, setIsActive] = useState(1)
 
 	/**
-	 * @param clickedScreen
+	 * @param {object} clickedScreen object representation of the clicked screen
+	 * @description handlels the navigation
 	 */
 	function handleNavigation(clickedScreen) {
 		setIsActive(clickedScreen.key)

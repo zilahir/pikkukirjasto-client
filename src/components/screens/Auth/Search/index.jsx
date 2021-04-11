@@ -30,7 +30,9 @@ const Search = () => {
 	const isCurrentlyLoading = isLoading || loading
 
 	/**
-	 * @param givenSearchTerm
+	 * @param {string} givenSearchTerm the search term typed into the input
+	 * @description performs a search with the provided searchterm, and sets the
+	 * filtered book array with the result
 	 */
 	function handleSearch(givenSearchTerm) {
 		setSearchTerm(givenSearchTerm)

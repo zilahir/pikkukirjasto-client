@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/consistent-function-scoping */
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { joiResolver } from '@hookform/resolvers/joi'
@@ -20,7 +19,10 @@ const Insert = () => {
 	})
 
 	/**
-	 * @param isbnValue
+	 * @param {string} isbnValue the isbn representation of the book
+	 * @description set's the value of he react-hook formm item
+	 * and the local isbn state with the value provided
+	 * int he arguments
 	 */
 	function handleIbsnChange(isbnValue) {
 		setValue('isbn', isbnValue)

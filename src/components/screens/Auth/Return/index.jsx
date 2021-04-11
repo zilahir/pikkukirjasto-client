@@ -22,7 +22,10 @@ const Borrow = () => {
 	const history = useHistory()
 
 	/**
-	 * @param data
+	 * @param {string} data the data the QR code contains
+	 * @description check if iits a "valid" JSON, and contains ISBN
+	 * if so, cals the return api and sets the book as returned
+	 * in the database
 	 */
 	function handleQrRead(data) {
 		if (data) {
@@ -45,7 +48,7 @@ const Borrow = () => {
 	}
 
 	/**
-	 *
+	 * @description goes back by one, in the browser's history
 	 */
 	function goBack() {
 		toggleSuccess(false)

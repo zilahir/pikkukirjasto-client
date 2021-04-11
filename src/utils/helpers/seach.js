@@ -1,9 +1,15 @@
 import cleanIsbn from './cleanIsbn'
 
 /**
- * @param givenSearchTerm
- * @param books
- * @param searchLogic
+ * @param {string} givenSearchTerm the search term typed into the input
+ * @param {Array} books the array of the books the search is perfmoed on
+ * @param {string} searchLogic the seachlogic we are performing
+ * @returns {Array} the filtered list of books,
+ * performed on the providied aray of books, with the provided searcherm
+ * and logic
+ * @description filters the book by the provided searchterm
+ * and sets the result into the array
+ * that contains the filtered books
  */
 function searchBooks(givenSearchTerm, books, searchLogic) {
 	let filtered = []

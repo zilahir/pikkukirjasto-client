@@ -37,7 +37,7 @@ const Camera = ({ isOpen, isbn, handleClose }) => {
 			.catch(() => {
 				toggleLoading(false)
 			})
-	}, [webcamReference])
+	}, [webcamReference, isbn])
 
 	return (
 		isOpen && (
