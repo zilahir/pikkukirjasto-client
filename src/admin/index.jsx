@@ -48,7 +48,9 @@ const Admin = () => {
 		)
 
 	/**
-	 * @param book
+	 * @param {object} book the object representation of a book
+	 * @description toogles the edit modal, and
+	 * set the selected book into the context API
 	 */
 	function selectBook(book) {
 		toggleEditModal(true)
@@ -65,9 +67,9 @@ const Admin = () => {
 		borrowHistory.filter(borrow => borrow.isBorrowed)
 
 	/**
-	 * @param toDelete
-	 * @param isbnToDelete
-	 * @param book
+	 * @param {object} book the object representation of a book
+	 * @description cals the DELETE api, to delete a specifc book
+	 * providied in the paramenters
 	 */
 	function deleteBook(book) {
 		axios.delete(`${apiEndpoints.deleteBook}/${book.isbn}`).then(() => {
@@ -84,12 +86,14 @@ const Admin = () => {
 	}
 
 	/**
-	 * @param toReturn
+	 * @param {object} book the object representation of a book
+	 * @description calls the return APi with the book provided
+	 * in the arguments
 	 */
-	function returnBook(toReturn) {
+	function returnBook(book) {
 		axios
 			.patch(apiEndpoints.returnBook, {
-				isbn: cleanIsbn(toReturn.isbn),
+				isbn: cleanIsbn(book.isbn),
 			})
 			.then(() => {
 				getBookList()

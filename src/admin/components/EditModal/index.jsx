@@ -62,14 +62,18 @@ const EditModal = ({ isVisible, handleClose }) => {
 	}
 
 	/**
-	 * @param coverUrl
+	 * @param {string} coverUrl the string representation
+	 * fo the book's cover
 	 */
 	function handleBookCover(coverUrl) {
 		setBookCover(coverUrl.url)
 	}
 
 	/**
-	 *
+	 * @description checks if every field is filled
+	 * if yes, it will return true
+	 * false otherwise
+	 * @returns {boolean} whether the book is saveable
 	 */
 	function checkIfSaveAble() {
 		const logic = [author, title, isbn]
@@ -78,7 +82,8 @@ const EditModal = ({ isVisible, handleClose }) => {
 	}
 
 	/**
-	 *
+	 * @description creates a new object of the book
+	 * and calles the PATCH api to modify a book
 	 */
 	function modify() {
 		const modifyObject = {
@@ -94,7 +99,8 @@ const EditModal = ({ isVisible, handleClose }) => {
 	}
 
 	/**
-	 *
+	 * @description creates a downloadabe file of the
+	 * book's QR code that contains the isbn
 	 */
 	function downloadThisQr() {
 		saveSvgAsPng(
@@ -104,7 +110,7 @@ const EditModal = ({ isVisible, handleClose }) => {
 	}
 
 	/**
-	 *
+	 * @description closes the edit modal
 	 */
 	function closeAndRefresh() {
 		handleClose()
