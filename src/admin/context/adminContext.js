@@ -1,6 +1,6 @@
 import { createContext } from 'react'
 
 export default createContext({
-	selectedBook: {},
+	selectedBook: undefined,
 	setSelectedBook: () => {},
 })
