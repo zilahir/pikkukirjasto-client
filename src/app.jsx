@@ -15,6 +15,8 @@ import OnBoad from './components/screens/OnBoard'
 import ReturnScreen from './components/screens/Auth/Return'
 import Search from './components/screens/Auth/Search'
 import Info from './components/screens/Auth/Info'
+import PrivateRoute from './components/common/ProtectedRoute'
+import Login from './components/screens/Login'
 
 /**
  *
@@ -31,8 +33,11 @@ function App() {
 				<Route exact path="/" component={Home} />
 				<Route exact path="/borrow" component={Borrow} />
 				<Route exact path="/add" component={Insert} />
-				<Route exact path="/admin" component={Admin} />
-				<Route exact path="/new" component={New} />
+				<Route exact path="/login" component={Login} />
+				<PrivateRoute exact path="/admin">
+					<Admin />
+				</PrivateRoute>
+				<PrivateRoute exact path="/new" component={New} />
 				<Route exact path="/search" component={Search} />
 				<Route exact path="/return" component={ReturnScreen} />
 				<Route exact path="/info" component={Info} />

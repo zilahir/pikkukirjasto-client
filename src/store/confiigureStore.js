@@ -3,9 +3,11 @@ import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 
 import books from './reducers/books'
+import admin from './reducers/admin'
 
 const rootReducer = combineReducers({
 	books,
+	admin,
 })
 
 // eslint-disable-next-line no-underscore-dangle
