@@ -121,7 +121,6 @@ const EditModal = ({ isVisible, handleClose }) => {
 		ReactDOM.createPortal(
 			<>
 				<div className={styles.editModalRootContainer}>
-					<h1>Edit</h1>
 					<div className={styles.innerContainer}>
 						<div className={styles.bookMetaContainer}>
 							<div className={styles.photoContainer}>

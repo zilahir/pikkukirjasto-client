@@ -7,7 +7,7 @@ export const authAdmin = isAdmin => ({
 	},
 })
 
-export const removeadmin = () => ({
+export const removeAdmin = () => ({
 	type: AUTH_ADMIN,
 	payload: {
 		isAdmin: false,

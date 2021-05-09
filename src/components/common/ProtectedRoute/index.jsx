@@ -2,24 +2,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Redirect, Route } from 'react-router'
+import { useSelector } from 'react-redux'
 
 /**
  * @param root0
  * @param root0.children
  */
 function PrivateRoute({ children, ...rest }) {
-	const auth = false
-	console.debug('hello', auth)
+	const { isAdmin } = useSelector(state => state.admin)
 	return (
 		<Route
 			{...rest}
 			render={({ location }) =>
-				auth ? (
+				isAdmin ? (
 					children
 				) : (
 					<Redirect
 						to={{
-							pathname: '/',
+							pathname: '/login',
 							state: { from: location },
 						}}
 					/>

@@ -1,15 +1,25 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router'
+import { authAdmin } from '../../../store/actions/admin'
 
 import styles from './Login.module.scss'
 
 const Login = () => {
 	const [password, setPassword] = useState()
+	const history = useHistory()
+	const dispatch = useDispatch()
 
 	/**
 	 *
 	 */
 	function handleLogin() {
-		console.debug('password', password)
+		if (password === process.env.REACT_APP_ADMIN_PASS) {
+			dispatch(authAdmin(true))
+			history.push('/admin')
+		} else {
+			alert('password is incorrect')
+		}
 	}
 	return (
 		<div className={styles.loginContainer}>
