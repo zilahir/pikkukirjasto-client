@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable unicorn/consistent-function-scoping */
 import React, { useEffect, useState } from 'react'
-import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel'
-import '@brainhubeu/react-carousel/lib/style.css'
+
 import { useQuery } from 'react-fetching-library'
 import WarningOutlinedIcon from '@material-ui/icons/WarningOutlined'
 
@@ -109,18 +108,7 @@ const MobileHome = () => {
 							</button>
 						</div>
 						{!loading && (
-							<Carousel
-								offset={10}
-								itemWidth={200}
-								plugins={[
-									{
-										resolve: slidesToShowPlugin,
-										options: {
-											numberOfSlides: 3,
-										},
-									},
-								]}
-							>
+							<div className={styles.bookListRoot}>
 								{payload.map(currentBook => (
 									<Book
 										onClick={() => handleClick(currentBook)}
@@ -134,7 +122,7 @@ const MobileHome = () => {
 										}}
 									/>
 								))}
-							</Carousel>
+							</div>
 						)}
 						{loading && (
 							<div className={styles.loaderContainer}>

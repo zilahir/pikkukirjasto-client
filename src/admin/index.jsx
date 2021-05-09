@@ -14,6 +14,7 @@ import AdminContext from './context/adminContext'
 import styles from './Admin.module.scss'
 import cleanIsbn from '../utils/helpers/cleanIsbn'
 import { removeBook, setAllBooks } from '../store/actions/books'
+import { removeAdmin } from '../store/actions/admin'
 
 const Admin = () => {
 	const [loading, setLoading] = useState(true)
@@ -99,6 +100,13 @@ const Admin = () => {
 				getBookList()
 			})
 	}
+
+	/**
+	 *
+	 */
+	function handleLogOut() {
+		dispatch(removeAdmin)
+	}
 	return (
 		<AdminContext.Provider
 			value={{
@@ -116,6 +124,9 @@ const Admin = () => {
 				<div className={styles.search}>
 					<button onClick={() => handlelSearch()} type="button">
 						<SearchIcon fontSize="large" />
+					</button>
+					<button type="button" onClick={() => handleLogOut()}>
+						log out
 					</button>
 				</div>
 			</header>

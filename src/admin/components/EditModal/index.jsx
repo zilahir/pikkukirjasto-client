@@ -6,10 +6,10 @@ import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import { saveSvgAsPng } from 'save-svg-as-png'
 import slugify from 'slugify'
-
-import axios from 'axios'
 import { useSnackbar } from 'react-simple-snackbar'
 import QRCode from 'react-qr-code'
+import axios from 'axios'
+
 import styles from './EditModal.module.scss'
 import adminContext from '../../context/adminContext'
 import UploadFile from '../../../components/common/UploadFile'
@@ -121,7 +121,6 @@ const EditModal = ({ isVisible, handleClose }) => {
 		ReactDOM.createPortal(
 			<>
 				<div className={styles.editModalRootContainer}>
-					<h1>Edit</h1>
 					<div className={styles.innerContainer}>
 						<div className={styles.bookMetaContainer}>
 							<div className={styles.photoContainer}>
@@ -136,7 +135,11 @@ const EditModal = ({ isVisible, handleClose }) => {
 										renderAs="canvas"
 										value={JSON.stringify({ isbn })}
 									/>
-									<button type="button" onClick={() => downloadThisQr()}>
+									<button
+										disabled={title.length === 0}
+										type="button"
+										onClick={() => downloadThisQr()}
+									>
 										download qr
 									</button>
 								</div>
@@ -166,6 +169,11 @@ const EditModal = ({ isVisible, handleClose }) => {
 								<button
 									type="button"
 									className={styles.addButton}
+									disabled={
+										isbn.length === 0 ||
+										title.length === 0 ||
+										author.length === 0
+									}
 									onClick={() => addBook()}
 								>
 									add this book to the library
