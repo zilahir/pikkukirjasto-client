@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Loader from 'react-loader-spinner'
 import StackGrid from 'react-stack-grid'
 import { orderBy } from 'lodash'
+import classnames from 'classnames'
 
 import apiEndpoints from '../../../../../api/apiEndPoints'
 import cleanIsbn from '../../../../../utils/helpers/cleanIsbn'
@@ -20,6 +21,7 @@ const DesktopHome = () => {
 	const [totelSumOfBooks, setTotalSumOfBooks] = useState(0)
 	const [searchLogic, setSearchLogic] = useState('title')
 	const [isLoading, toggleLoading] = useState(true)
+	const [activeSort, setActiveSort] = useState('abc')
 
 	const isBorrowed = isbn =>
 		borrowHistory.some(
@@ -31,8 +33,13 @@ const DesktopHome = () => {
 		const allBooks = axios.get(apiEndpoints.getAllBooks)
 		Promise.all([history, allBooks])
 			.then(results => {
+				const ordered = orderBy(
+					results[1].data,
+					[book => book.title.toLowerCase()],
+					['asc'],
+				)
 				setBorrowHistory(results[0].data)
-				setFilteredBooks(results[1].data)
+				setFilteredBooks(ordered)
 				setAllBooks(results[1].data)
 				setTotalSumOfBooks(results[1].data.length)
 			})
@@ -60,14 +67,21 @@ const DesktopHome = () => {
 	 */
 	function handleSort(chosenSort) {
 		toggleLoading(true)
+		setActiveSort(chosenSort)
 		if (chosenSort === 'abc') {
 			const ordered = orderBy(
-				filteredBooks,
+				orignalBookList,
 				[book => book.title.toLowerCase()],
 				['asc'],
 			)
 
 			setFilteredBooks(ordered)
+			toggleLoading(false)
+		} else if (chosenSort === 'borrowed') {
+			const borrowed = orignalBookList.filter(({ isbn }) =>
+				isBorrowed(cleanIsbn(isbn)),
+			)
+			setFilteredBooks(borrowed)
 			toggleLoading(false)
 		}
 	}
@@ -101,10 +115,27 @@ const DesktopHome = () => {
 					<div className={styles.sortContainer}>
 						<button
 							type="button"
-							className={styles.sortBtn}
+							className={classnames(
+								styles.sortBtn,
+								activeSort && activeSort === 'abc'
+									? styles.activeSort
+									: styles.notActive,
+							)}
 							onClick={() => handleSort('abc')}
 						>
 							A-Z
+						</button>
+						<button
+							type="button"
+							className={classnames(
+								styles.sortBtn,
+								activeSort && activeSort === 'borrowed'
+									? styles.activeSort
+									: styles.notActive,
+							)}
+							onClick={() => handleSort('borrowed')}
+						>
+							borrowed
 						</button>
 					</div>
 					<StackGrid columnWidth={350} monitorImagesLoaded>

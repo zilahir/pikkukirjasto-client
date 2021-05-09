@@ -74,6 +74,11 @@
 		padding: 10px 8px;
 		background: rgba($color: $main-background-dark, $alpha: 1);
 		border-radius: 5px;
+		margin: 0 5px;
+
+		&.notActive {
+			background: rgba($color: $main-background-dark, $alpha: 0.5);
+		}
 
 		&:focus {
 			outline: none;
